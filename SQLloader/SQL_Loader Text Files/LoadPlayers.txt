@@ -1,0 +1,21 @@
+options ( skip=0 )
+load data
+	infile	'Players.csv'
+	truncate 
+	continueif last != ';'
+	into table players
+fields terminated by ","
+optionally enclosed by '"'
+TRAILING NULLCOLS
+	( PLAYER_ID,
+	NAME,
+	FNAME,
+	LNAME,
+	DOB DATE "YYYY-MM-DD",
+	COUNTRY,
+	HEIGHT,
+	CLUB,
+	POSITION,
+	CAPS_FOR_COUNTRY,
+	IS_CAPTAIN
+	)

@@ -1,0 +1,11 @@
+options ( skip=0 )
+load data
+	infile	'Country.csv'
+	truncate into table country
+fields terminated by ","
+optionally enclosed by '"'
+	( COUNTRY_NAME,
+	POPULATION,
+	NO_OF_WORLDCUP_WON,
+	MANAGER
+	)

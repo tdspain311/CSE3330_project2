@@ -1,0 +1,13 @@
+options ( skip=0 )
+load data
+	infile	'Player_Assists_Goals.csv'
+	truncate into table player_assists_goals
+fields terminated by ","
+optionally enclosed by '"'
+TRAILING NULLCOLS
+	( PLAYER_ID,
+	NO_OF_MATCHES,
+	GOALS,
+	ASSISTS,
+	MINUTES_PLAYED
+	)

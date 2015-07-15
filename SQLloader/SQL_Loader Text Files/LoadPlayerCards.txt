@@ -1,0 +1,11 @@
+options ( skip=0 )
+load data
+	infile	'Player_Cards.csv'
+	truncate into table player_cards
+fields terminated by ","
+optionally enclosed by '"'
+TRAILING NULLCOLS
+	( PLAYER_ID,
+	YELLOW_CARDS,
+	RED_CARDS
+	)

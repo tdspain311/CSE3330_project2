@@ -1,0 +1,17 @@
+options ( skip=0 )
+load data
+	infile	'Match_results.csv'
+	truncate into table match_results
+fields terminated by ","
+optionally enclosed by '"'
+TRAILING NULLCOLS
+	( MATCH_ID,
+	DATE_OF_MATCH DATE "YYYY-MM-DD",
+	START_TIME_OF_MATCH TIMESTAMP "hh24:mi:ss",
+	TEAM1,
+	TEAM2,
+	TEAM1_SCORE,
+	TEAM2_SCORE,
+	STADIUM_NAME,
+	HOST_CITY
+	)
