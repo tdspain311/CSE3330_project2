@@ -17,7 +17,7 @@ if ($conn->connect_error) {
 
 echo "<br/> <br/> Load Country.csv <br/>";
 
-$myfile = fopen("Input_Data/Country.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../../Input_Data/Country.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
@@ -50,7 +50,7 @@ fflush($myfile);
 
 echo "<br/> <br/> Load Match_results.csv <br/>";
 
-$myfile = fopen("Input_Data/Match_results.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../../Input_Data/Match_results.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
@@ -93,7 +93,7 @@ fflush($myfile);
 
 echo "<br/> <br/> Load Player_Assists_Goals.csv <br/>";
 
-$myfile = fopen("Input_Data/Player_Assists_Goals.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../../Input_Data/Player_Assists_Goals.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
@@ -129,7 +129,7 @@ fflush($myfile);
 
 echo "<br/> <br/> Load Player_Cards.csv <br/>";
 
-$myfile = fopen("Input_Data/Player_Cards.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../../Input_Data/Player_Cards.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
@@ -160,7 +160,7 @@ fflush($myfile);
 
 echo "<br/> <br/> Load Players.csv <br/>";
 
-$myfile = fopen("Input_Data/Players.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../../Input_Data/Players.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
@@ -203,6 +203,3 @@ while(!feof($myfile)){
 }
 fflush($myfile);
 ?>
-
-
-
