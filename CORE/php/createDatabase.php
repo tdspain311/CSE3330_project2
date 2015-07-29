@@ -8,7 +8,7 @@ $password = "password";
 $conn = mysqli_connect($servername, $username, $password);
 
 // Create database
-$sql = "CREATE DATABASE soccer";
+$sql = "CREATE DATABASE db_rental";
 if ($conn->query($sql) === TRUE) {
     echo "Database created successfully";
 } else {

@@ -2,100 +2,78 @@
 $servername = "localhost";
 $username = "test_user";
 $password = "password";
-$dbname = "soccer";
+$dbname = "db_rental";
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
 // sql to create table
-$sql = "CREATE TABLE country 
+$sql = "CREATE TABLE customer
 (
-Country_Name VARCHAR(20) PRIMARY KEY,
-Population  DECIMAL(10,2),
-No_of_Worldcup_won INT,
-Manager VARCHAR(20)
+IdNo INT PRIMARY KEY,
+Name varchar(50)		NOT NULL,
+Phone varchar(15)
 )";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table country created successfully";
+    echo "<br>Table customer created successfully";
 } else {
     echo "<br>Error creating table: " . $conn->error;
 }
 
-$sql = "CREATE TABLE players
+$sql = "CREATE TABLE car
 (
-Player_id INT PRIMARY KEY,
-Name VARCHAR(40),
-Fname VARCHAR(20),
-Lname VARCHAR(35),
-DOB DATE,
-Country VARCHAR(20),
-Height INT,
-Club VARCHAR(30),
-Position VARCHAR(10),
-Caps_for_Country INT,
-Is_captain VARCHAR(10),
-FOREIGN KEY (Country) REFERENCES country(Country_Name) 
+VehicleID INT PRIMARY KEY,
+Model VARCHAR (70)		NOT NULL,
+Year INT			    NOT NULL,
+Type VARCHAR(10)		NOT NULL,
+Availability VARCHAR(10)
 );";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table players created successfully";
+    echo "<br>Table car created successfully";
 } else {
     echo "<br>Error creating table: " . $conn->error;
 }
 
-$sql = "CREATE TABLE match_results
+$sql = "CREATE TABLE car_type
 (
-Match_id INT PRIMARY KEY,
-Date_of_Match DATE,
-Start_Time_Of_Match TIME,
-Team1 VARCHAR(25),
-Team2 VARCHAR(25),
-Team1_score INT,
-Team2_score INT,
-Stadium_Name VARCHAR(35),
-Host_City VARCHAR(20),
-FOREIGN KEY (Team1) REFERENCES country(Country_Name),
-FOREIGN KEY (Team2) REFERENCES country(Country_Name) 
-);";
-//TESTING
-/* ,
-FOREIGN KEY (Team1) REFERENCES country(Country_Name),
-FOREIGN KEY (Team2) REFERENCES country(Country_Name)  
-*/
-
-if ($conn->query($sql) === TRUE) {
-    echo "<br>Table match_results created successfully";
-} else {
-    echo "<br>Error creating table: " . $conn->error;
-}
-
-$sql = "CREATE TABLE player_cards
-(
-Player_id INT PRIMARY KEY,
-Yellow_Cards INT,
-Red_Cards INT,
-FOREIGN KEY (Player_id) REFERENCES players(Player_id) 
+VehicleID int,
+TypeName varchar(10),
+DailyRate decimal(10,2),
+WeeklyRate decimal(10,2),
+PRIMARY KEY (VehicleID,TypeName),
+FOREIGN KEY (VehicleID) REFERENCES car(VehicleID)
 );";
 
+//FOREIGN KEY (TypeName) REFERENCES car(Type)
+
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table player_cards created successfully";
+    echo "<br>Table car_type created successfully";
 } else {
     echo "<br>Error creating table: " . $conn->error;
 }
 
-$sql = "CREATE TABLE player_assists_goals 
+
+$sql = "CREATE TABLE rental
 (
-Player_id INT PRIMARY KEY,
-No_of_Matches INT,
-Goals INT,
-Assists INT,
-Minutes_Played INT,
-FOREIGN KEY (Player_id) REFERENCES players(Player_id) 
-)";
+Status VARCHAR(12),
+VehicleID INT(4),
+CustID INT(2),
+Daily VARCHAR(6),
+Weekly VARCHAR(6),
+StartDate DATE,
+NoOfDays INT,
+NoOfWeeks INT,
+ReturnDate DATE,
+AmountDue decimal(10,2),
+PRIMARY KEY (VehicleID,CustID,Status),
+FOREIGN KEY (VehicleID) REFERENCES car(VehicleID),
+FOREIGN KEY (CustID) REFERENCES customer(IdNo)
+);";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table player_assists_goals created successfully";
+    echo "<br>Table rental created successfully";
 } else {
     echo "<br>Error creating table: " . $conn->error;
 }
