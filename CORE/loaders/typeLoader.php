@@ -12,23 +12,26 @@ if ($conn->connect_error) {
     echo "Connection error";
 } 
 
-//CarType Loader
+//type Loader
 
-echo "<br/> <br/> Load CarType.csv <br/>";
+echo "<br/> <br/> Load Type.csv <br/>";
 
-$myfile = fopen("../Input_Data/CarType.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../Input_Data/Type.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
     $newstring = preg_replace("/[\r\n]/","",$line);
 
     list($VehicleID, 
-		 $TypeName)=explode(",", $newstring);
+		 $TypeName, 
+		 $DailyRate, 
+		 $WeeklyRate)=explode(",", $newstring);
 		 
-	$sql = "INSERT INTO car_type VALUES (" . $VehicleID . ", " . $TypeName . ");";
-	
+	$sql = "INSERT INTO type VALUES (" . $VehicleID . ", " . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . ");";
+	echo $sql;
+    
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $VehicleID . ", " . $TypeName . "  added successfully";
+		echo "<br>" . $VehicleID . ", " . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . "  added successfully";
 	} else {
 		echo "<br>Error adding data: " . $conn->error;
 	}

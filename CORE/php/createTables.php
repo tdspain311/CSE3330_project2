@@ -26,7 +26,6 @@ $sql = "CREATE TABLE car
 VehicleID INT PRIMARY KEY,
 Model VARCHAR (70)		NOT NULL,
 Year INT			    NOT NULL,
-Type VARCHAR(10)		NOT NULL,
 Availability VARCHAR(10)
 );";
 
@@ -36,14 +35,28 @@ if ($conn->query($sql) === TRUE) {
     echo "<br>Error creating table: " . $conn->error;
 }
 
+$sql = "CREATE TABLE type
+(
+TypeName varchar(10) PRIMARY KEY,
+DailyRate decimal(10,2),
+WeeklyRate decimal(10,2)
+);";
+
+//FOREIGN KEY (TypeName) REFERENCES car(Type)
+
+if ($conn->query($sql) === TRUE) {
+    echo "<br>Table type created successfully";
+} else {
+    echo "<br>Error creating table: " . $conn->error;
+}
+
 $sql = "CREATE TABLE car_type
 (
-VehicleID int,
-TypeName varchar(10),
-DailyRate decimal(10,2),
-WeeklyRate decimal(10,2),
-PRIMARY KEY (VehicleID,TypeName),
-FOREIGN KEY (VehicleID) REFERENCES car(VehicleID)
+VID int,
+TName varchar(10),
+PRIMARY KEY (VID,TName),
+FOREIGN KEY (VID) REFERENCES car(VehicleID),
+FOREIGN KEY (TName) REFERENCES type(TypeName)
 );";
 
 //FOREIGN KEY (TypeName) REFERENCES car(Type)
@@ -67,7 +80,7 @@ NoOfDays INT,
 NoOfWeeks INT,
 ReturnDate DATE,
 AmountDue decimal(10,2),
-PRIMARY KEY (VehicleID,CustID,Status),
+PRIMARY KEY (Status,VehicleID,CustID),
 FOREIGN KEY (VehicleID) REFERENCES car(VehicleID),
 FOREIGN KEY (CustID) REFERENCES customer(IdNo)
 );";

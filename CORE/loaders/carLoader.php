@@ -26,16 +26,15 @@ while(!feof($myfile)){
  
     list($VehicleID, 
 		 $Model, 
-		 $Year, 
-		 $Type, 
+		 $Year,  
 		 $Availability)=explode(",", $newstring);
 		 
 	//echo $VehicleID . $Model . $Year . $Type . $Availability . "<br>";
 	
-	$sql = "INSERT INTO car VALUES (" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Type . ", " . $Availability . ");";
+	$sql = "INSERT INTO car VALUES (" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Type . ", " . $Availability . " added successfully";
+		echo "<br>" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . " added successfully";
 	} else {
 		echo "<br>Error adding data: " . $conn->error;
 	}

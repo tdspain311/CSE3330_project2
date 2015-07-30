@@ -37,7 +37,8 @@ while(!feof($myfile)){
 }
 fflush($myfile);
 
-//Load Cars
+//Cars Loader
+
 echo "<br/> <br/> Load Cars.csv <br/>";
 
 $myfile = fopen("../Input_Data/Cars.csv", "r") or die("Unable to openfile!");
@@ -50,16 +51,40 @@ while(!feof($myfile)){
  
     list($VehicleID, 
 		 $Model, 
-		 $Year, 
-		 $Type, 
+		 $Year,  
 		 $Availability)=explode(",", $newstring);
 		 
 	//echo $VehicleID . $Model . $Year . $Type . $Availability . "<br>";
 	
-	$sql = "INSERT INTO car VALUES (" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Type . ", " . $Availability . ");";
+	$sql = "INSERT INTO car VALUES (" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Type . ", " . $Availability . " added successfully";
+		echo "<br>" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . " added successfully";
+	} else {
+		echo "<br>Error adding data: " . $conn->error;
+	}
+}
+fflush($myfile);
+
+//type Loader
+
+echo "<br/> <br/> Load Type.csv <br/>";
+
+$myfile = fopen("../Input_Data/Type.csv", "r") or die("Unable to openfile!");
+
+while(!feof($myfile)){
+    $line = fgets($myfile);
+    $newstring = preg_replace("/[\r\n]/","",$line);
+
+    list($TypeName, 
+		 $DailyRate, 
+		 $WeeklyRate)=explode(",", $newstring);
+		 
+	$sql = "INSERT INTO type VALUES (" . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . ");";
+	//echo $VehicleID . $TypeName . $DailyRate . $WeeklyRate . "<br>";
+    
+	if ($conn->query($sql) === TRUE) {
+		echo "<br>" . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . "  added successfully";
 	} else {
 		echo "<br>Error adding data: " . $conn->error;
 	}
@@ -77,14 +102,12 @@ while(!feof($myfile)){
     $newstring = preg_replace("/[\r\n]/","",$line);
 
     list($VehicleID, 
-		 $TypeName, 
-		 $DailyRate, 
-		 $WeeklyRate)=explode(",", $newstring);
+		 $TypeName)=explode(",", $newstring);
 		 
-	$sql = "INSERT INTO car_type VALUES (" . $VehicleID . ", " . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . ");";
+	$sql = "INSERT INTO car_type VALUES (" . $VehicleID . ", " . $TypeName . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $VehicleID . ", " . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . "  added successfully";
+		echo "<br>" . $VehicleID . ", " . $TypeName . "  added successfully";
 	} else {
 		echo "<br>Error adding data: " . $conn->error;
 	}
