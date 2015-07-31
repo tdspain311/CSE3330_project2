@@ -16,7 +16,7 @@ if ($conn->connect_error) {
 
 echo "<br/> <br/> Load Customer.csv <br/>";
 
-$myfile = fopen("../Input_Data/Customers.csv", "r") or die("Unable to openfile!");
+$myfile = fopen("../../Input_Data/Customers.csv", "r") or die("Unable to openfile!");
 
 while(!feof($myfile)){
     $line = fgets($myfile);
