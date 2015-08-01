@@ -7,6 +7,20 @@ $dbname = "db_rental";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname); 
 
+$sql = "SELECT * FROM customer";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table class='tables'><tr><th colspan='3'>Customer</th></tr><tr><th>IdNo</th><th>Name</th><th>Phone</th></tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["IdNo"]."</td><td>".$row["Name"]."</td><td>".$row["Phone"]."</td></tr>";
+    }
+    echo "</table><br>";
+} else {
+    echo "0 results<br>";
+}
+
 $sql = "SELECT * FROM car";
 $result = $conn->query($sql);
 
@@ -15,6 +29,20 @@ if ($result->num_rows > 0) {
     // output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<tr><td>".$row["VehicleID"]."</td><td>".$row["Model"]."</td><td>".$row["Year"]."</td><td>".$row["Availability"]."</td></tr>";
+    }
+    echo "</table><br>";
+} else {
+    echo "0 results<br>";
+}
+
+$sql = "SELECT * FROM type";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table class='tables'><tr><th colspan='3'>Type</th></tr><tr><th>TypeName</th><th>DailyRate</th><th>WeeklyRate</th></tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["TypeName"]."</td><td>".$row["DailyRate"]."</td><td>".$row["WeeklyRate"]."</td></tr>";
     }
     echo "</table><br>";
 } else {
@@ -35,20 +63,6 @@ if ($result->num_rows > 0) {
     echo "0 results<br>";
 }
 
-$sql = "SELECT * FROM customer";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo "<table class='tables'><tr><th colspan='3'>Customer</th></tr><tr><th>IdNo</th><th>Name</th><th>Phone</th></tr>";
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["IdNo"]."</td><td>".$row["Name"]."</td><td>".$row["Phone"]."</td></tr>";
-    }
-    echo "</table><br>";
-} else {
-    echo "0 results<br>";
-}
-
 $sql = "SELECT * FROM rental";
 $result = $conn->query($sql);
 
@@ -63,18 +77,5 @@ if ($result->num_rows > 0) {
     echo "0 results<br>";
 }
 
-$sql = "SELECT * FROM type";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    echo "<table class='tables'><tr><th colspan='3'>Type</th></tr><tr><th>TypeName</th><th>DailyRate</th><th>WeeklyRate</th></tr>";
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["TypeName"]."</td><td>".$row["DailyRate"]."</td><td>".$row["WeeklyRate"]."</td></tr>";
-    }
-    echo "</table><br>";
-} else {
-    echo "0 results<br>";
-}
 $conn->close();
 ?>

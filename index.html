@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<style>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<style>
 #header {
     background-color:blue;
     color:white;
@@ -45,74 +45,74 @@ table.tables th	{
     background-color: blue;
     color: white;
 }
-</style>
-<script>
-function showConn() {
-	$.ajax({url: "CORE/php/test_conn.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-}
-function createDB() {
-	$.ajax({url: "CORE/php/createDatabase.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-}
-function createTables() {
-	$.ajax({url: "CORE/php/createTables.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-}
-function loaders() {
-	$.ajax({url: "CORE/php/loadData.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-	$.ajax({url: "CORE/php/viewTables.php"}).done(function( html ) {
-		$("#tableViewer"). append(html);
-	});
-}
-function dropDB() {
-	$.ajax({url: "CORE/php/dropDatabase.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-}
-</script>
-</head>
-<body>
+		</style>
+		<script>
+	function showConn() {
+		$.ajax({url: "CORE/php/test_conn.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+	function createDB() {
+		$.ajax({url: "CORE/php/createDatabase.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+	function createTables() {
+		$.ajax({url: "CORE/php/createTables.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+	function loaders() {
+		$.ajax({url: "CORE/php/loadData.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+		$.ajax({url: "CORE/php/viewTables.php"}).done(function( html ) {
+			$("#tableViewer"). append(html);
+		});
+	}
+	function dropDB() {
+		$.ajax({url: "CORE/php/dropDatabase.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+		</script>
+	</head>
+	<body>
 
-<div id="header">
-<h1>CSE 3330 Project 2</h1>
-</div>
+		<div id="header">
+			<h1>CSE 3330 Project 2</h1>
+		</div>
 
-<div id="nav">
-	<table>
-			<tr>
-				<td><a href="CORE/php/phpinfo.php">PHP Test</td>
-			</tr>
-			<tr>
-				<td><a href=# onclick="showConn()">Test Connection</a></td>
-			</tr>
-			<tr>
-				<td><a href=# onclick="createDB()">Create Database</a></td>
-			</tr>
-			<tr>
-				<td><a href=# onclick="createTables()">Create Tables</a></td>
-			</tr>
-			<tr>
-				<td><a href=# onclick="loaders()">Load Records</a></td>
-			</tr>
-			<tr>
-				<td><a href="CORE/query.html">Query Database</a></td>
-			</tr>
-			<tr>
-				<td><a href=# onclick="dropDB()">Drop Database</a></td>
-			</tr>
-	</table>
-</div>
+		<div id="nav">
+			<table>
+				<tr>
+					<td><a href="CORE/php/phpinfo.php">PHP Test</td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="showConn()">Test Connection</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="createDB()">Create Database</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="createTables()">Create Tables</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="loaders()">Load Records</a></td>
+					</tr>
+					<tr>
+						<td><a href="CORE/query.html">Query Database</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="dropDB()">Drop Database</a></td>
+					</tr>
+				</table>
+			</div>
 
-<div id="output">
-</div>
+			<div id="output">
+			</div>
 
-<div id="tableViewer">
-</div>
-</body>
-</html>
+			<div id="tableViewer">
+			</div>
+		</body>
+	</html>
