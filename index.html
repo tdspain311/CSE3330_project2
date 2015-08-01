@@ -25,8 +25,6 @@
     float:left; 	 
 }
 #tableViewer {
-    color:white;
-    clear:both;
     text-align:center;
     padding:5px;	 	 
 }
@@ -50,6 +48,9 @@ function createTables() {
 function loaders() {
 	$.ajax({url: "CORE/php/loadData.php"}).done(function( html ) {
 		$("#output").append(html);
+	});
+	$.ajax({url: "CORE/php/viewTables.php"}).done(function( html ) {
+		$("#tableViewer"). append(html);
 	});
 }
 </script>
