@@ -8,11 +8,11 @@ $password = "password";
 $conn = mysqli_connect($servername, $username, $password);
 
 // Create database
-$sql = "CREATE DATABASE db_rental";
+$sql = "DROP SCHEMA db_rental";
 if ($conn->query($sql) === TRUE) {
-    echo "Database 'db_rental' created successfully<br>";
+    echo "Database 'db_rental' dropped successfully<br>";
 } else {
-    echo "Error creating database: " . $conn->error . "<br>";
+    echo "Error dropping database: " . $conn->error . "<br>";
 }
 
 $conn ->close();
