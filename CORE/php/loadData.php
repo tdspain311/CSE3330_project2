@@ -9,10 +9,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
     //die("Connection failed: " . $conn->connect_error);
-    echo "Connection error";
+    echo "Connection error<br>";
 } 
 
-echo "<br/> <br/> Load Customer.csv <br/>";
+echo "<br/> Load Customer.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Customers.csv", "r") or die("Unable to openfile!");
 
@@ -29,9 +29,9 @@ while(!feof($myfile)){
 	$sql = "INSERT INTO customer VALUES (" . $IdNo . ", " . $Name . ", " . $Phone . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $IdNo . ", " . $Name . ", " . $Phone . "  added successfully";
+		echo $IdNo . ", " . $Name . ", " . $Phone . "  added successfully<br>";
 	} else {
-		echo "<br>Error adding data: " . $conn->error;
+		echo "Error adding data: " . $conn->error . "<br>";
 	}
 
 }
@@ -39,7 +39,7 @@ fflush($myfile);
 
 //Cars Loader
 
-echo "<br/> <br/> Load Cars.csv <br/>";
+echo "<br/> Load Cars.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Cars.csv", "r") or die("Unable to openfile!");
 
@@ -59,16 +59,16 @@ while(!feof($myfile)){
 	$sql = "INSERT INTO car VALUES (" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . " added successfully";
+		echo $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . " added successfully<br>";
 	} else {
-		echo "<br>Error adding data: " . $conn->error;
+		echo "Error adding data: " . $conn->error . "<br>";
 	}
 }
 fflush($myfile);
 
 //type Loader
 
-echo "<br/> <br/> Load Type.csv <br/>";
+echo "<br/> Load Type.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Type.csv", "r") or die("Unable to openfile!");
 
@@ -84,16 +84,16 @@ while(!feof($myfile)){
 	//echo $VehicleID . $TypeName . $DailyRate . $WeeklyRate . "<br>";
     
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . "  added successfully";
+		echo $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . "  added successfully<br>";
 	} else {
-		echo "<br>Error adding data: " . $conn->error;
+		echo "Error adding data: " . $conn->error . "<br>";
 	}
 }
 fflush($myfile);
 
 //CarType Loader
 
-echo "<br/> <br/> Load CarType.csv <br/>";
+echo "<br/> Load CarType.csv <br/>";
 
 $myfile = fopen("../../Input_Data/CarType.csv", "r") or die("Unable to openfile!");
 
@@ -107,16 +107,16 @@ while(!feof($myfile)){
 	$sql = "INSERT INTO car_type VALUES (" . $VehicleID . ", " . $TypeName . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $VehicleID . ", " . $TypeName . "  added successfully";
+		echo $VehicleID . ", " . $TypeName . "  added successfully<br>";
 	} else {
-		echo "<br>Error adding data: " . $conn->error;
+		echo "Error adding data: " . $conn->error . "<br>";
 	}
 }
 fflush($myfile);
 
 //Rental Loader
 
-echo "<br/> <br/> Load Rental.csv <br/>";
+echo "<br/> Load Rental.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Rental.csv", "r") or die("Unable to openfile!");
 
@@ -142,9 +142,9 @@ while(!feof($myfile)){
 	$sql = "INSERT INTO rental VALUES (" . $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . ", " . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . ", " . $ReturnDate . ", " . $AmountDue . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo "<br>" . $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . ", " . $ReturnDate . ", " . $AmountDue . "  added successfully";
+		echo $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . ", " . $ReturnDate . ", " . $AmountDue . "  added successfully<br>";
 	} else {
-		echo "<br>Error adding data: " . $conn->error;
+		echo "Error adding data: " . $conn->error . "<br>";
 	}
 }
 fflush($myfile);

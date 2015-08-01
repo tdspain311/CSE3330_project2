@@ -1,28 +1,92 @@
- <html>
-	<head>
-		<title>Project 2</title>
-	</head>
-	<body>
-		<center><b>CSE 3330 Project 2</b></center>
-		<table>
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<style>
+#header {
+    background-color:blue;
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:25%;
+    float:left;
+    padding-left:5px;	      
+}
+#output {
+	padding-left:8px;
+	overflow:auto;
+    width:74%;
+	max-height:300px;
+    float:left; 	 
+}
+#tableViewer {
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;	 	 
+}
+</style>
+<script>
+function showConn() {
+	$.ajax({url: "CORE/php/test_conn.php"}).done(function( html ) {
+		$("#output").append(html);
+	});
+}
+function createDB() {
+	$.ajax({url: "CORE/php/createDatabase.php"}).done(function( html ) {
+		$("#output").append(html);
+	});
+}
+function createTables() {
+	$.ajax({url: "CORE/php/createTables.php"}).done(function( html ) {
+		$("#output").append(html);
+	});
+}
+function loaders() {
+	$.ajax({url: "CORE/php/loadData.php"}).done(function( html ) {
+		$("#output").append(html);
+	});
+}
+</script>
+</head>
+<body>
+
+<div id="header">
+<h1>CSE 3330 Project 2</h1>
+</div>
+
+<div id="nav">
+	<table>
 			<tr>
-				<td><a href="CORE/php/phpinfo.php">PHP Test</a></td>
+				<td><a href="CORE/php/phpinfo.php">PHP Test</td>
 			</tr>
 			<tr>
-				<td><a href="CORE/php/test_conn.php">Test Connection</a></td>
+				<td><a href=# onclick="showConn()">Test Connection</a></td>
 			</tr>
 			<tr>
-				<td><a href="CORE/php/createDatabase.php">Create Database</a></td>
+				<td><a href=# onclick="createDB()">Create Database</a></td>
 			</tr>
 			<tr>
-				<td><a href="CORE/php/createTables.php">Create Tables</a></td>
+				<td><a href=# onclick="createTables()">Create Tables</a></td>
 			</tr>
 			<tr>
-				<td><a href="CORE/php/loadData.php">Load Records</a></td>
+				<td><a href=# onclick="loaders()">Load Records</a></td>
 			</tr>
 			<tr>
 				<td><a href="CORE/query.html">Query Database</a></td>
 			</tr>
-		</table>
-	</body>
+	</table>
+</div>
+
+<div id="output">
+</div>
+
+<div id="tableViewer">
+</div>
+</body>
 </html>

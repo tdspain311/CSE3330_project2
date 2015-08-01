@@ -16,9 +16,9 @@ Phone varchar(15)
 )";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table customer created successfully";
+    echo "Table customer created successfully<br>";
 } else {
-    echo "<br>Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error . "<br>";
 }
 
 $sql = "CREATE TABLE car
@@ -30,9 +30,9 @@ Availability VARCHAR(10)
 );";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table car created successfully";
+    echo "Table car created successfully<br>";
 } else {
-    echo "<br>Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error . "<br>";
 }
 
 $sql = "CREATE TABLE type
@@ -45,9 +45,9 @@ WeeklyRate decimal(10,2)
 //FOREIGN KEY (TypeName) REFERENCES car(Type)
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table type created successfully";
+    echo "Table type created successfully<br>";
 } else {
-    echo "<br>Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error . "<br>";
 }
 
 $sql = "CREATE TABLE car_type
@@ -62,9 +62,9 @@ FOREIGN KEY (TName) REFERENCES type(TypeName)
 //FOREIGN KEY (TypeName) REFERENCES car(Type)
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table car_type created successfully";
+    echo "Table car_type created successfully<br>";
 } else {
-    echo "<br>Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error . "<br>";
 }
 
 
@@ -86,9 +86,9 @@ FOREIGN KEY (CustID) REFERENCES customer(IdNo)
 );";
 
 if ($conn->query($sql) === TRUE) {
-    echo "<br>Table rental created successfully";
+    echo "Table rental created successfully<br>";
 } else {
-    echo "<br>Error creating table: " . $conn->error;
+    echo "Error creating table: " . $conn->error . "<br>";
 }
 
 $conn->close();
