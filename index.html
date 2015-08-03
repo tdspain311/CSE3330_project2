@@ -12,7 +12,7 @@
 #nav {
     line-height:30px;
     background-color:#eeeeee;
-    height:300px;
+    height:350px;
     width:25%;
     float:left;
     padding-left:5px;	      
@@ -21,8 +21,14 @@
 	padding-left:8px;
 	overflow:auto;
     width:74%;
-	max-height:300px;
+	max-height:332px;
     float:left; 	 
+}
+#logger {
+	background-color:#eeeeee;
+	width:74%;
+	float:left;
+	padding-left:8px;
 }
 #tableViewer {
     text-align:center;
@@ -66,7 +72,14 @@ table.tables th	{
 		$.ajax({url: "CORE/php/loadData.php"}).done(function( html ) {
 			$("#output").append(html);
 		});
-		$.ajax({url: "CORE/php/viewTables.php"}).done(function( html ) {
+	}
+	function createTriggers() {
+		$.ajax({url: "CORE/php/createTriggers.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+	function showTables() {
+	$.ajax({url: "CORE/php/viewTables.php"}).done(function( html ) {
 			$("#tableViewer"). append(html);
 		});
 	}
@@ -75,6 +88,7 @@ table.tables th	{
 			$("#output").append(html);
 		});
 	}
+	
 		</script>
 	</head>
 	<body>
@@ -85,6 +99,9 @@ table.tables th	{
 
 		<div id="nav">
 			<table>
+				<tr>
+					<th style="text-align:left">Navigation</th>
+				</tr>
 				<tr>
 					<td><a href="CORE/php/phpinfo.php">PHP Test</td>
 					</tr>
@@ -101,6 +118,12 @@ table.tables th	{
 						<td><a href=# onclick="loaders()">Load Records</a></td>
 					</tr>
 					<tr>
+						<td><a href=# onclick="createTriggers()">Create Triggers</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="showTables()">Show Tables</a></td>
+					</tr>
+					<tr>
 						<td><a href="CORE/query.html">Query Database</a></td>
 					</tr>
 					<tr>
@@ -108,7 +131,11 @@ table.tables th	{
 					</tr>
 				</table>
 			</div>
-
+			
+			<div id="logger">
+			<b><center>Logger</center></b>
+			</div>
+			
 			<div id="output">
 			</div>
 
