@@ -67,10 +67,10 @@ $sql = "SELECT * FROM rental";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table class='tables'><tr><th colspan='9'>Rental</th></tr><tr><th>Status</th><th>VehicleID</th><th>CustID</th><th>Daily</th><th>Weekly</th><th>StartDate</th><th>NoOfDays</th><th>ReturnDate</th><th>AmountDue</th></tr>";
+    echo "<table class='tables'><tr><th colspan='10'>Rental</th></tr><tr><th>Status</th><th>VehicleID</th><th>CustID</th><th>Daily</th><th>Weekly</th><th>StartDate</th><th>NoOfDays</th><th>NoOfWeeks</th><th>ReturnDate</th><th>AmountDue</th></tr>";
     // output data of each row
     while($row = $result->fetch_assoc()) {
-        echo "<tr><td>".$row["Status"]."</td><td>".$row["VehicleID"]."</td><td>".$row["CustID"]."</td><td>".$row["Daily"]."</td><td>".$row["Weekly"]."</td><td>".$row["StartDate"]."</td><td>".$row["NoOfDays"]."</td><td>".$row["ReturnDate"]."</td><td>".$row["AmountDue"]."</td></tr>";
+        echo "<tr><td>".$row["Status"]."</td><td>".$row["VehicleID"]."</td><td>".$row["CustID"]."</td><td>".$row["Daily"]."</td><td>".$row["Weekly"]."</td><td>".$row["StartDate"]."</td><td>".$row["NoOfDays"]."</td><td>".$row["NoOfWeeks"]."</td><td>".$row["ReturnDate"]."</td><td>".$row["AmountDue"]."</td></tr>";
     }
     echo "</table><br>";
 } else {
