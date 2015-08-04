@@ -1,6 +1,7 @@
 <html>
 	<head>
 		<title>Project 2</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 	<style>
 #header {
     background-color:blue;
@@ -10,17 +11,119 @@
 }
 #title {
 	background-color:#eeeeee;
+	border-bottom:solid;
+}
+#nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:200px;
+    width:25%;
+    float:left;
+    padding-left:5px;	      
+}
+#nav_table {
+	line-height:30px;
+}
+#logger {
+	border-bottom:solid;
+	background-color:#eeeeee;
+}
+#output {
+    background-color:#eeeeee;
+	padding-left:8px;
+	overflow:auto;;
+	max-height:179px; 
+}
+#top_viewer {
+	width:100%;
+	display:inline-block;
+}
+#tableViewer {
+    text-align:center;	 
+}
+.tables {
+	width:100%;
+	border:2;
+}
+.tables th {
+	text-align: center;
+}
+table.tables td {
+	text-align:center;
+}
+table.tables tr:nth-child(even) {
+    background-color: #eee;
+}
+table.tables tr:nth-child(odd) {
+   background-color:#C2D6FF;
+}
+table.tables th	{
+    background-color: blue;
+    color: white;
 }
 	</style>
 	</head>
 	<body>
+	<script>
+	function rentalRecords() {
+		$.ajax({url: "query/rentalRecords.php"}).done(function( html ) {
+			$("#tableViewer").append(html);
+		});
+	}
+		function insertRecord() {
+		$.ajax({url: "query/insert.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+		function updateRecord() {
+		$.ajax({url: "query/update.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+		function deleteRecord() {
+		$.ajax({url: "query/delete.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+	</script>
 		<div id="header">
 			<h1>CSE 3330 Project 2</h1>
 		</div>
+		
 		<div id="title">
 			<center><b>Query Data</b></center>
 		</div>
-		<table>
-		</table>
+		
+		<div id="top_viewer">
+			
+			<div id="nav">
+			<b><center style="background-color:#eeeeee; border-bottom:solid; line-height:18px">Navigation</center></b>
+				<table id="nav_table">
+					<tr>
+						<td><a href=# onclick="rentalRecords()">View Rental Records</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="insertRecord()">Insert A New Record</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="updateRecord()">Update Existing Record</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="deleteRecord()">Delete A Records</a></td>
+					</tr>
+				</table>
+			</div>
+				
+				
+			<div id="logger">
+				<b><center style="background-color:#eeeeee;">Logger</center></b>
+			</div>
+			<div id="output">
+			</div>
+			
+		</div>
+	
+	<div id="tableViewer">
+	</div>
 	</body>
 </html>
