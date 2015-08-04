@@ -10,9 +10,10 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 // sql to create table
 $sql = "CREATE TABLE customer
 (
-IdNo INT PRIMARY KEY,
+IdNo INT                NOT NULL AUTO_INCREMENT,
 Name varchar(50)		NOT NULL,
-Phone varchar(15)
+Phone varchar(15),
+PRIMARY KEY (IdNo)
 )";
 
 if ($conn->query($sql) === TRUE) {
@@ -23,10 +24,11 @@ if ($conn->query($sql) === TRUE) {
 
 $sql = "CREATE TABLE car
 (
-VehicleID INT PRIMARY KEY,
+VehicleID INT(5)           NOT NULL AUTO_INCREMENT,
 Model VARCHAR (70)		NOT NULL,
 Year INT			    NOT NULL,
-Availability VARCHAR(10)
+Availability VARCHAR(10),
+PRIMARY KEY (VehicleID)
 );";
 
 if ($conn->query($sql) === TRUE) {
@@ -34,6 +36,8 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating table: " . $conn->error . "<br>";
 }
+//$sql = "ALTER TABLE car AUTO_INCREMENT=1001;";
+
 
 $sql = "CREATE TABLE type
 (

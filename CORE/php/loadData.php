@@ -21,15 +21,14 @@ while(!feof($myfile)){
 
     $newstring = preg_replace("/[\r\n]/","",$line);
  
-    list($IdNo, 
-		 $Name, 
+    list($Name, 
 		 $Phone)=explode(",", $newstring);
 		 
 		
-	$sql = "INSERT INTO customer VALUES (" . $IdNo . ", " . $Name . ", " . $Phone . ");";
+	$sql = "INSERT INTO customer(Name,Phone) VALUES (" . $Name . ", " . $Phone . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo $IdNo . ", " . $Name . ", " . $Phone . "  added successfully<br>";
+		echo $Name . ", " . $Phone . "  added successfully<br>";
 	} else {
 		echo "Error adding data: " . $conn->error . "<br>";
 	}
@@ -49,20 +48,29 @@ while(!feof($myfile)){
     $newstring = preg_replace("/[\r\n]/","",$line);
     //echo($newstring);
  
-    list($VehicleID, 
-		 $Model, 
+    list($Model, 
 		 $Year,  
 		 $Availability)=explode(",", $newstring);
 		 
 	//echo $VehicleID . $Model . $Year . $Type . $Availability . "<br>";
-	
-	$sql = "INSERT INTO car VALUES (" . $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . ");";
-	
+    $sql = "ALTER TABLE car AUTO_INCREMENT=1001;";
+    $conn->query($sql);
+//    
+//    if ($conn->query($sql) === TRUE) {
+//		echo "Car table altered successfully<br>";
+//	} else {
+//		echo "Error adding data: " . $conn->error . "<br>";
+//	}
+
+	$sql = "INSERT INTO car(Model,Year,Availability) VALUES (" . $Model . ", " . $Year . ", " . $Availability . ");";
+
 	if ($conn->query($sql) === TRUE) {
-		echo $VehicleID . ", " . $Model . ", " . $Year . ", " . $Availability . " added successfully<br>";
+		echo $Model . ", " . $Year . ", " . $Availability . " added successfully<br>";
 	} else {
 		echo "Error adding data: " . $conn->error . "<br>";
 	}
+    
+
 }
 fflush($myfile);
 
