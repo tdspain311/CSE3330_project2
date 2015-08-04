@@ -1,7 +1,8 @@
 <html>
 <head>
-    <title>Project 2</title>
+<!--    <title>Project 2</title>-->
 <style>
+/*
 #header {
 background-color:blue;
 color:white;
@@ -11,6 +12,7 @@ padding:5px;
 #title {
 background-color:#eeeeee;
 }
+*/
 
 #insertDataForm {
 	padding:1em;
@@ -38,12 +40,14 @@ background-color:#eeeeee;
 </style>
 
 </head>
+<!--
     <div id="header">
         <h1>CSE 3330 Project 2</h1>
     </div>
     <div id="title">
         <center><b>Insert Information</b></center>
     </div>
+-->
 
 <body>
     <form id="insertDataForm" action="insertData.php" method="post">
@@ -65,10 +69,6 @@ background-color:#eeeeee;
             
             <legend>Customer</legend>
 
-            <label for="custID">ID Number</label>
-            <input type="text" name="id_number" id="custID" />
-            <br><br />
-
             <label for="custName">Name</label>
             <input type="text" name="cust_name" id="custName" />
             <br><br />
@@ -82,10 +82,6 @@ background-color:#eeeeee;
         <fieldset id="Car">
 
           <legend>Car</legend>
-
-            <label for="vehicleID">Vehicle ID</label>
-            <input type="text" name="vehicle" id="vehicleID" size="5"/>
-            <br><br />
 
             <label for="model">Model</label>
             <input type="text" name="car_model" id="model" />
@@ -104,27 +100,13 @@ background-color:#eeeeee;
 
             <label for="year">Year</label>
             <input type="text" name="year_model" id="year" size="5"/>
-            <br><br />
-
-            <label for="available">Availability</label>
-            <select name="car_available" id="available">
-            <option>Yes</option>
-            <option>No</option>
-            </select>
-            
+            <br><br />            
 
        </fieldset>
 
        <fieldset id="Rental">
 
            <legend>Rental</legend>
-
-            <label for="status">Status</label>
-            <select name="rental_status" id="status">
-                <option>Current</option>
-                <option>Scheduled</option>
-            </select>
-            <br><br />
 
             <label for="vehicleID">Vehicle ID</label>
             <input type="text" name="vehicle" id="vehicleID" />
