@@ -8,12 +8,12 @@ $dbname = "db_rental";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname); 
 
-echo "INSERT INFO"
+echo "INSERT INFO";
     
 if(isset($_POST['formSubmit']) )
 {
     $tableName = $_POST['formTableName'];
-    $CustName;
+    $CustName = $_POST['cust_name'];
     $CustID;
     $Phone;
     $VehicleID;
@@ -32,6 +32,8 @@ if(isset($_POST['formSubmit']) )
     
     $errorMessage = "";
 
+    echo $CustName;
+    
     if(empty($tableName)) 
     {
     $errorMessage = "<li>You forgot to select a table!</li>";

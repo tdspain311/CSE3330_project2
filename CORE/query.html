@@ -66,15 +66,22 @@ table.tables th	{
 	</head>
 	<body>
 	<script>
+        
+    $(document).ready(function(){
+        $("#insertDataForm").hide();
+    });
+   
 	function rentalRecords() {
 		$.ajax({url: "query/rentalRecords.php"}).done(function( html ) {
 			$("#tableViewer").append(html);
 		});
 	}
 		function insertRecord() {
-		$.ajax({url: "query/insert.php"}).done(function( html ) {
+		$.ajax({url: "query/insertData.php"
+               }).done(function( html ) {
 			$("#output").append(html);
 		});
+            $("#insertDataForm").show();
 	}
 		function updateRecord() {
 		$.ajax({url: "query/update.php"}).done(function( html ) {
@@ -86,6 +93,18 @@ table.tables th	{
 			$("#output").append(html);
 		});
 	}
+        
+        function submitForm(form) {
+        console.log(form.cust_name.value);
+        var cust_name = form.cust_name.value;
+        $.ajax({url: "query/insertData.php",
+                data: cust_name
+               }).done(function( html ) {
+            $("#output").append(html);
+        });
+            $("#insertDataForm").hide();
+	}
+    
 	</script>
 		<div id="header">
 			<h1>CSE 3330 Project 2</h1>
@@ -94,7 +113,7 @@ table.tables th	{
 		<div id="title">
 			<center><b>Query Data</b></center>
 		</div>
-<<<<<<< HEAD
+<!--<<<<<<< HEAD-->
 <!--
         
         <table>
@@ -115,7 +134,7 @@ table.tables th	{
         <div id="tableViewer">
 			</div>
 -->
-=======
+<!--=======-->
 		
 		<div id="top_viewer">
 			
@@ -146,8 +165,141 @@ table.tables th	{
 			
 		</div>
 	
+        <div id=forms>
+          <form id="insertDataForm">
+
+        <fieldset id="tableType">
+
+            <label for="tableNames">Select a table to insert data:</label>
+                 <select name="formTableName" id="tableNames">
+<!--                    <select onchange="displayForm(this.value)" >-->
+                  <option value="">Select...</option>
+                  <option value="Customer">Customer</option>
+                  <option value="Car">Car</option>
+                  <option value="Rental">Rental</option>
+                </select>
+
+        </fieldset>
+
+        <fieldset id="Customer">
+            
+            <legend>Customer</legend>
+
+
+            <label for="custName">Name</label>
+            <input type="text" name="cust_name" id="custName" />
+            <br><br />
+
+            <label for="phoneNo">Phone</label>
+            <input type="text" name="phone_num" id="phoneNo" />
+            <br><br />
+
+        </fieldset>
+
+        <fieldset id="Car">
+
+          <legend>Car</legend>
+
+
+            <label for="model">Model</label>
+            <input type="text" name="car_model" id="model" />
+            <br><br/>
+
+            <label for="type">Car Type</label>
+            <select name="carType" id="type">
+             <option>SUV</option>
+             <option>Compact</option>
+             <option>Medium</option>
+             <option>Large</option>
+             <option>Truck</option>
+             <option>Van</option>
+            </select>
+            <br><br />
+
+            <label for="year">Year</label>
+            <input type="text" name="year_model" id="year" size="5"/>
+            <br><br />
+
+       </fieldset>
+
+       <fieldset id="Rental">
+
+           <legend>Rental</legend>
+
+            <label for="vehicleID">Vehicle ID</label>
+            <input type="text" name="vehicle" id="vehicleID" />
+            <br><br />
+
+            <label for="custID">Customer ID</label>
+            <input type="text" name="id_number" id="custID" />
+            <br><br />
+
+            <label for="daily">Daily Rental?</label>
+            <select name="rental_daily" id="daily">
+            <option>Yes</option>
+            <option>No</option>
+            </select>		        
+            <br><br />
+
+            <label for="weekly">Weekly Rental?</label>
+            <select name="rental_weekly" id="weekly">
+            <option>Yes</option>
+            <option>No</option>
+            </select>		        
+            <br><br />
+
+            <label for="daysNo">Number of Days</label>
+            <input type="text" name="days_number" id="daysNo" />
+            <br><br />
+
+            <label for="weeksNo">Number of Weeks</label>
+            <input type="text" name="weeks_number" id="weeksNo" />
+            <br><br />
+
+
+       </fieldset>
+
+    <div class="submitForm">
+      <input type="submit" name="formSubmit" value="Submit" onclick="submitForm(this.form);"/>
+
+    </div>
+
+    </form>
+
+    </div>
+        
 	<div id="tableViewer">
 	</div>
+        
+    <script>
+                (function() {
+            var
+                d = document,
+                fieldsets = ['Customer', 'Car', 'Rental'];
+
+            for (var t=0; t<fieldsets.length; t++) {
+                fieldsets[t] = d.getElementById(fieldsets[t]);
+                fieldsets[t].style.display = 'none';
+            }
+            d.getElementById('tableNames').onchange = function(e) {
+                e = e || window.event;
+                var
+                    t = e.target || e.srcElement;
+
+                for (var n=0; n<fieldsets.length; n++) {
+                    fieldsets[n].style.display = 'none';
+                }
+                if (s = d.getElementById(t.options[t.selectedIndex].value)) {
+                    s.style.display = 'block';
+                }
+
+            } // "tableType".onchange
+
+            d.getElementById('insertDataForm').className += ' scriptOn';
+
+        })();
+    </script>
+        
 >>>>>>> fa6c1576b46ba2cc8779847a0018a5911a470217
 	</body>
 </html>

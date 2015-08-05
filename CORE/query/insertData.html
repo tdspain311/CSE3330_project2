@@ -15,7 +15,7 @@ background-color:#eeeeee;
 */
 
 #insertDataForm {
-	padding:1em;
+	padding:1em;k
 }
 
 #insertDataForm label {
@@ -50,7 +50,24 @@ background-color:#eeeeee;
 -->
 
 <body>
-    <form id="insertDataForm" action="insertData.php" method="post">
+    
+    <script>
+        
+//	$("#insertDataForm").on("submit", function (e) {
+//		$.ajax({url: "query/insertData.php"}).done(function( html ) {
+//			$("#output").append(html);
+//		});
+//     e.preventDefault();   
+//	})
+//    
+    function submitForm() {
+    $.ajax({url: "query/insertData.php"}).done(function( html ) {
+        $("#output").append(html);
+    });
+	}
+    
+    </script>
+    <form id="insertDataForm">
 
         <fieldset id="tableType">
 
@@ -69,6 +86,7 @@ background-color:#eeeeee;
             
             <legend>Customer</legend>
 
+
             <label for="custName">Name</label>
             <input type="text" name="cust_name" id="custName" />
             <br><br />
@@ -82,6 +100,7 @@ background-color:#eeeeee;
         <fieldset id="Car">
 
           <legend>Car</legend>
+
 
             <label for="model">Model</label>
             <input type="text" name="car_model" id="model" />
@@ -100,7 +119,7 @@ background-color:#eeeeee;
 
             <label for="year">Year</label>
             <input type="text" name="year_model" id="year" size="5"/>
-            <br><br />            
+            <br><br />
 
        </fieldset>
 
@@ -142,23 +161,18 @@ background-color:#eeeeee;
             <input type="text" name="weeks_number" id="weeksNo" />
             <br><br />
 
-            <label for="returnDate">Return Date (YYYY-MM-DD)</label>
-            <input type="text" name="return_date" id="returnDate" />
-            <br><br />
-
-            <label for="amountDue">Amount Due</label>
-            <input type="text" name="amount_due" id="amountDue" />
-            <br><br />
-
 
        </fieldset>
 
     <div class="submitForm">
-      <input type="submit" name="formSubmit" value="Submit" />
+      <input type="submit" name="formSubmit" value="Submit" onclick="return submitForm();"/>
+
     </div>
 
     </form>
 
+    <div id="output">
+			</div>
     <script>
 
         (function() {
