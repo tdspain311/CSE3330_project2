@@ -53,8 +53,8 @@ while(!feof($myfile)){
 		 $Availability)=explode(",", $newstring);
 		 
 	//echo $VehicleID . $Model . $Year . $Type . $Availability . "<br>";
-    $sql = "ALTER TABLE car AUTO_INCREMENT=1001;";
-    $conn->query($sql);
+    // $sql = "ALTER TABLE car AUTO_INCREMENT=1001;";
+    // $conn->query($sql);
 //    
 //    if ($conn->query($sql) === TRUE) {
 //		echo "Car table altered successfully<br>";

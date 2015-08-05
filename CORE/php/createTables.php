@@ -10,8 +10,8 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 // sql to create table
 $sql = "CREATE TABLE customer
 (
-IdNo INT                NOT NULL AUTO_INCREMENT,
-Name varchar(50)		NOT NULL,
+IdNo INT                				NOT NULL AUTO_INCREMENT,
+Name varchar(50)					NOT NULL,
 Phone varchar(15),
 PRIMARY KEY (IdNo)
 )";
@@ -24,10 +24,10 @@ if ($conn->query($sql) === TRUE) {
 
 $sql = "CREATE TABLE car
 (
-VehicleID INT(5)           NOT NULL AUTO_INCREMENT,
-Model VARCHAR (70)		NOT NULL,
-Year INT			    NOT NULL,
-Availability VARCHAR(10),
+VehicleID INT(5)           			NOT NULL AUTO_INCREMENT,
+Model VARCHAR (70)			NOT NULL,
+Year INT			    				NOT NULL,
+Availability VARCHAR(10) 		DEFAULT 'Yes',
 PRIMARY KEY (VehicleID)
 );";
 
@@ -41,9 +41,10 @@ if ($conn->query($sql) === TRUE) {
 
 $sql = "CREATE TABLE type
 (
-TypeName varchar(10) PRIMARY KEY,
+TypeName varchar(10),
 DailyRate decimal(10,2),
-WeeklyRate decimal(10,2)
+WeeklyRate decimal(10,2),
+PRIMARY KEY (TypeName)
 );";
 
 //FOREIGN KEY (TypeName) REFERENCES car(Type)
@@ -71,17 +72,16 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
-
 $sql = "CREATE TABLE rental
 (
-Status VARCHAR(12),
+Status VARCHAR(12) 			DEFAULT 'Scheduled',
 VehicleID INT(4),
 CustID INT(2),
-Daily VARCHAR(6),
-Weekly VARCHAR(6),
-StartDate DATE,
-NoOfDays INT,
-NoOfWeeks INT,
+Daily VARCHAR(6)				DEFAULT 'No',
+Weekly VARCHAR(6)			DEFAULT 'No',
+StartDate VARCHAR(10),
+NoOfDays INT						DEFAULT 0,
+NoOfWeeks INT					DEFAULT 0,
 ReturnDate DATE,
 AmountDue decimal(10,2),
 PRIMARY KEY (Status,VehicleID,CustID),
@@ -95,32 +95,13 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
-//**TESTING**
-//TRIGGERS
-// $sql = "CREATE TRIGGER ReturnDate_Insert BEFORE INSERT ON rental
-// FOR EACH ROW 
-// BEGIN
-// SET NEW.ReturnDate = DATE_ADD(StartDate, INTERVAL NoOfDays+7*NoOfWeeks DAY);
-// END;";
+$sql ="ALTER TABLE car AUTO_INCREMENT=1000;";
 
-// if ($conn->query($sql) === TRUE) {
-    // echo "Table trigger 'ReturnDate_Insert' created successfully<br>";
-// } else {
-    // echo "Error creating trigger: " . $conn->error . "<br>";
-// }
-
-// $sql = "CREATE TRIGGER ReturnDate_Update BEFORE UPDATE ON rental
-// FOR EACH ROW 
-// BEGIN
-// SET NEW.ReturnDate = DATE_ADD(StartDate, INTERVAL NoOfDays+7*NoOfWeeks DAY);
-// END;";
-
-// if ($conn->query($sql) === TRUE) {
-    // echo "Table trigger 'ReturnDate_Update' created successfully<br>";
-// } else {
-    // echo "Error creating trigger: " . $conn->error . "<br>";
-// }
-
+if ($conn->query($sql) === TRUE) {
+    echo "Table car altered successfully<br>";
+} else {
+    echo "Error altering table: " . $conn->error . "<br>";
+}
 $conn->close();
 
 ?>
