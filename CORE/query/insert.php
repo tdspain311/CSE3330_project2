@@ -34,15 +34,15 @@ if(isset($_POST['formTableName'])) {
 			}
 			break;
 		case "Rental":
-			$param1 = $_POST['vehicle'];
-			$param2 = $_POST['id_number'];
-			$param3 = $_POST['period'];
+			$param1 = $_POST['vid'];
+			$param2 = $_POST['cid'];
+			$param3 = $_POST['rental_type'];
 			$param4 = $_POST['days_weeks'];
 			if ($param3 == 'Daily') {
-				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Period, NoOfDays) VALUES ( " . $param1 . ", " . $param2 . ", '" . $param3 . "', '" . $param4 . ");";
+				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Daily, StartDate, NoOfDays) VALUES ( " . $param1 . ", " . $param2 . ", 'Yes', CURDATE()," . $param4 . ");";
 			}
 			if ($param3 == 'Weekly') {
-				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Period, NoOfWeeks) VALUES ( " . $param1 . ", " . $param2 . ", '" . $param3 . "', '" . $param4 . ");";
+				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Weekly, StartDate, NoOfWeeks) VALUES ( " . $param1 . ", " . $param2 . ", 'Yes', CURDATE()," . $param4 . ");";
 			}
 			if ($conn->query($sql) === TRUE) {
 				echo $param1 . ", " . $param2 . ", " . $param3 . ", " . $param4 . ", " . $param5 . ", " . $param6 . ", entered into table '" . $table . "' successfully<br>";
