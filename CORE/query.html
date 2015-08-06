@@ -1,268 +1,377 @@
 <html>
-<head>
-	<title>Project 2</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<style>
+	<head>
+		<title>Project 2</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
+	<style>
 #header {
-background-color:blue;
-color:white;
-text-align:center;
-padding:5px;
+    background-color:blue;
+    color:white;
+    text-align:center;
+    padding:5px;
 }
 #title {
-background-color:#eeeeee;
-border-bottom:solid;
+	background-color:#eeeeee;
+	border-bottom:solid;
 }
 #nav {
-line-height:30px;
-background-color:#eeeeee;
-height:200px;
-width:20%;
-float:left;
-padding-left:5px;	      
+    line-height:30px;
+    background-color:#eeeeee;
+    height:200px;
+    width:20%;
+    float:left;
+    padding-left:5px;	      
 }
 #nav_table {
-line-height:30px;
+	line-height:30px;
 }
 #logger {
-border-bottom:solid;
-background-color:#eeeeee;
+	border-bottom:solid;
+	background-color:#eeeeee;
 }
 #output {
-background-color:#eeeeee;
-padding-left:8px;
-overflow:auto;;
-max-height:179px; 
+    background-color:#eeeeee;
+	padding-left:8px;
+	overflow:auto;;
+	max-height:179px; 
 }
 #top_viewer {
-width:100%;
-display:inline-block;
+	width:100%;
+	display:inline-block;
 }
 #tableViewer {
-text-align:center;	 
+    text-align:center;	 
 }
 .tables {
-width:100%;
-border:2;
+	width:100%;
+	border:2;
 }
 .tables th {
-text-align: center;
+	text-align: center;
 }
 table.tables td {
-text-align:center;
+	text-align:center;
 }
 table.tables tr:nth-child(even) {
-background-color: #eee;
+    background-color: #eee;
 }
 table.tables tr:nth-child(odd) {
-background-color:#C2D6FF;
+   background-color:#C2D6FF;
 }
 table.tables th	{
-background-color: blue;
-color: white;
+    background-color: blue;
+    color: white;
 }
-</style>
+	</style>
+	
+	</head>
+	<body>
 
-</head>
-<body>
-<script>
-	
-function viewAllRecords() {
-	$.ajax({url: "query/records.php"}).done(function( html ) {
-		$('#tableViewer').empty();
-		$('#tableViewer').append(html);
-	});
-}
-	function insertRecord() {
-		$("#insertDataForm").show();
-}
-	function updateRecord() {
-	$.ajax({url: "query/update.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-}
-	function deleteRecord() {
-	$.ajax({url: "query/delete.php"}).done(function( html ) {
-		$("#output").append(html);
-	});
-}
-	
-$(document).ready(function(){
-	$("#insertDataForm").hide();
-    $("#insertDataForm").submit(function(){
-        $.ajax({
-            url: 'query/insert.php',
-            type: "POST",
-            data: $('#insertDataForm').serialize(),
-			success: function( html ) {
-				$("#output").append(html);
-			}
-         });
-		$("#insertDataForm").hide();	
-        return false;
-     });
-});
-	
-</script>
-	<div id="header">
-		<h1>CSE 3330 Project 2</h1>
-	</div>
-	
-	<div id="title">
-		<center><b>Query Data</b></center>
-	</div>
-	
-	<div id="top_viewer">
-		
-		<div id="nav">
-		<b><center style="background-color:#eeeeee; border-bottom:solid; line-height:18px">Navigation</center></b>
-			<table id="nav_table">
-				<tr>
-					<td><a href=# onclick="viewAllRecords()">View Rental Records</a></td>
-				</tr>
-				<tr>
-					<td><a href=# onclick="insertRecord()">Insert A New Record</a></td>
-				</tr>
-				<tr>
-					<td><a href=# onclick="updateRecord()">Update Existing Record</a></td>
-				</tr>
-				<tr>
-					<td><a href=# onclick="deleteRecord()">Delete A Records</a></td>
-				</tr>
-			</table>
+    <script>
+        
+    $(document).ready(function(){
+        $("#insertDataForm").hide();
+		$('#updateDataForm').hide();
+    });
+   
+	function viewAllRecords() {
+		$.ajax({url: "query/records.php"}).done(function( html ) {
+			$('#tableViewer').empty();
+			$("#tableViewer").append(html);
+		});
+	}
+		function insertRecord() {
+            $("#insertDataForm").show();
+	}
+		function updateRecord() {
+			$("#updateDataForm").show();
+	}
+		function deleteRecord() {
+		$.ajax({url: "query/delete.php"}).done(function( html ) {
+			$("#output").append(html);
+		});
+	}
+      
+        $(document).ready(function(){
+			$("#insertDataForm").hide();
+            $('#insertDataForm').ajaxForm({
+                success: function( html ) {
+					$("#output").append(html);
+					viewAllRecords();
+					$("#insertDataForm").hide();
+				}
+			}); 
+		});  
+            
+    </script>
+		<div id="header">
+			<h1>CSE 3330 Project 2</h1>
 		</div>
+		
+		<div id="title">
+			<center><b>Query Data</b></center>
+		</div>
+		
+		<div id="top_viewer">
 			
+			<div id="nav">
+			<b><center style="background-color:#eeeeee; border-bottom:solid; line-height:18px">Navigation</center></b>
+				<table id="nav_table">
+					<tr>
+						<td><a href=# onclick="viewAllRecords()">View Rental Records</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="insertRecord()">Insert A New Record</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="updateRecord()">Update Existing Record</a></td>
+					</tr>
+					<tr>
+						<td><a href=# onclick="deleteRecord()">Delete A Records</a></td>
+					</tr>
+				</table>
+			</div>
+				
+				
+			<div id="logger">
+				<b><center style="background-color:#eeeeee;">Logger</center></b>
+			</div>
+			<div id="output">
+			</div>
 			
-		<div id="logger">
-			<b><center style="background-color:#eeeeee;">Logger</center></b>
 		</div>
-		<div id="output">
-		</div>
-		
+	
+        <div id='forms'>
+          <form id="insertDataForm" action="query/insert.php" method="post" >
+
+        <fieldset id="tableType">
+
+            <label for="tableNames">Select a table to insert data:</label>
+                 <select name="formTableName" id="tableNames">
+                  <option value="">Select...</option>
+                  <option value="Customer">Customer</option>
+                  <option value="Car">Car</option>
+                  <option value="Rental">Rental</option>
+                </select>
+
+        </fieldset>
+
+        <fieldset id="Customer">
+            
+            <legend>Customer</legend>
+
+
+            <label for="custName">Name</label>
+            <input type="text" name="cust_name" id="custName" />
+            <br><br />
+
+            <label for="phoneNo">Phone</label>
+            <input type="text" name="phone_num" id="phoneNo" />
+            <br><br />
+
+        </fieldset>
+
+        <fieldset id="Car">
+
+          <legend>Car</legend>
+
+
+            <label for="model">Model</label>
+            <input type="text" name="car_model" id="model" />
+            <br><br/>
+
+            <label for="type">Car Type</label>
+            <select name="carType" id="type">
+             <option>SUV</option>
+             <option>Compact</option>
+             <option>Medium</option>
+             <option>Large</option>
+             <option>Truck</option>
+             <option>Van</option>
+            </select>
+            <br><br />
+
+            <label for="year">Year</label>
+            <input type="text" name="year_model" id="year" size="5"/>
+            <br><br />
+
+       </fieldset>
+
+       <fieldset id="Rental">
+
+           <legend>Rental</legend>
+
+            <label for="vehicleID">Vehicle ID</label>
+            <input type="text" name="vid" id="vehicleID" />
+            <br><br />
+
+            <label for="custID">Customer ID</label>
+            <input type="text" name="cid" id="custID" />
+            <br><br />
+
+            <label for="rentalType">Type of Rental</label>
+            <select name="rental_type" id="rentalType">
+            <option>Daily</option>
+            <option>Weekly</option>
+            </select>		        
+            <br><br />
+
+            <label for="dwNumber">Number of Days/Weeks</label>
+            <input type="text" name="days_weeks" id="dwNumber" />
+            <br><br />
+
+       </fieldset>
+
+    <div class="submitForm">
+      <input type="submit" name="formSubmit" value="submit" />
+
+    </div>
+
+    </form>
+	    <script>
+            (function() {
+            var
+                d = document,
+                fieldsets = ['Customer', 'Car', 'Rental'];
+
+            for (var t=0; t<fieldsets.length; t++) {
+                fieldsets[t] = d.getElementById(fieldsets[t]);
+                fieldsets[t].style.display = 'none';
+            }
+            d.getElementById('tableNames').onchange = function(e) {
+                e = e || window.event;
+                var
+                    t = e.target || e.srcElement;
+
+                for (var n=0; n<fieldsets.length; n++) {
+                    fieldsets[n].style.display = 'none';
+                }
+                if (s = d.getElementById(t.options[t.selectedIndex].value)) {
+                    s.style.display = 'block';
+                }
+
+            } 
+            d.getElementById('insertDataForm').className += ' scriptOn';
+        })();
+    </script>
+	  <form id="updateDataForm" action="query/update.php" method="post" >
+
+        <fieldset id="updateTableType">
+
+            <label for="updateTableNames">Select a table to insert data:</label>
+                 <select name="formTableName" id="updateTableNames">
+                  <option value="">Select...</option>
+                  <option value="Customer">Customer</option>
+                  <option value="Car">Car</option>
+                  <option value="Rental">Rental</option>
+                </select>
+
+        </fieldset>
+
+        <fieldset id="updateCustomer">
+            
+            <legend>Customer</legend>
+
+
+            <label for="updateCustName">Name</label>
+            <input type="text" name="cust_name" id="updateCustName" />
+            <br><br />
+
+            <label for="updatePhoneNo">Phone</label>
+            <input type="text" name="phone_num" id="updatePhoneNo" />
+            <br><br />
+
+        </fieldset>
+
+        <fieldset id="updateCar">
+
+          <legend>Car</legend>
+
+
+            <label for="updateModel">Model</label>
+            <input type="text" name="car_model" id="Model" />
+            <br><br/>
+
+            <label for="updateType">Car Type</label>
+            <select name="carType" id="updateType">
+             <option>SUV</option>
+             <option>Compact</option>
+             <option>Medium</option>
+             <option>Large</option>
+             <option>Truck</option>
+             <option>Van</option>
+            </select>
+            <br><br />
+
+            <label for="updateYear">Year</label>
+            <input type="text" name="year_model" id="updateYear" size="5"/>
+            <br><br />
+
+       </fieldset>
+
+       <fieldset id="updateRental">
+
+           <legend>Rental</legend>
+
+            <label for="updateVehicleID">Vehicle ID</label>
+            <input type="text" name="vid" id="updateVehicleID" />
+            <br><br />
+
+            <label for="updateCustID">Customer ID</label>
+            <input type="text" name="cid" id="updateCustID" />
+            <br><br />
+
+            <label for="updateRentalType">Type of Rental</label>
+            <select name="rental_type" id="updateRentalType">
+            <option>Daily</option>
+            <option>Weekly</option>
+            </select>		        
+            <br><br />
+
+            <label for="updateDwNumber">Number of Days/Weeks</label>
+            <input type="text" name="days_weeks" id="updateDwNumber" />
+            <br><br />
+
+       </fieldset>
+
+    <div class="submitForm">
+      <input type="submit" name="formSubmit" value="submit" />
+
+    </div>
+
+    </form>
+	
+	    <script>
+            (function() {
+            var
+                d = document,
+                fieldsets = ['updateCustomer', 'updateCar', 'updateRental'];
+
+            for (var t=0; t<fieldsets.length; t++) {
+                fieldsets[t] = d.getElementById(fieldsets[t]);
+                fieldsets[t].style.display = 'none';
+            }
+            d.getElementById('updateTableNames').onchange = function(e) {
+                e = e || window.event;
+                var
+                    t = e.target || e.srcElement;
+
+                for (var n=0; n<fieldsets.length; n++) {
+                    fieldsets[n].style.display = 'none';
+                }
+                if (s = d.getElementById(t.options[t.selectedIndex].value)) {
+                    s.style.display = 'block';
+                }
+
+            } 
+			d.getElementById('updateDataForm').className += ' scriptOn';
+        })();
+    </script>
+    </div>
+        
+	<div id="tableViewer">
 	</div>
-
-	<div id=forms>
-	  <form id="insertDataForm" action=#>
-
-	<fieldset id="tableType">
-
-		<label for="tableNames">Select a table to insert data:</label>
-			 <select name="formTableName" id="tableNames">
-			  <option value="">Select...</option>
-			  <option value="Customer">Customer</option>
-			  <option value="Car">Car</option>
-			  <option value="Rental">Rental</option>
-			</select>
-
-	</fieldset>
-
-	<fieldset id="Customer">
-		
-		<legend>Customer</legend>
-
-
-		<label for="custName">Name</label>
-		<input type="text" name="cust_name" id="custName" />
-		<br><br />
-
-		<label for="phoneNo">Phone</label>
-		<input type="text" name="phone_num" id="phoneNo" />
-		<br><br />
-
-	</fieldset>
-
-	<fieldset id="Car">
-
-	  <legend>Car</legend>
-
-
-		<label for="model">Model</label>
-		<input type="text" name="car_model" id="model" />
-		<br><br/>
-
-		<label for="type">Car Type</label>
-		<select name="carType" id="type">
-		 <option>SUV</option>
-		 <option>Compact</option>
-		 <option>Medium</option>
-		 <option>Large</option>
-		 <option>Truck</option>
-		 <option>Van</option>
-		</select>
-		<br><br />
-
-		<label for="year">Year</label>
-		<input type="text" name="year_model" id="year" size="5"/>
-		<br><br />
-
-   </fieldset>
-
-   <fieldset id="Rental">
-
-	   <legend>Rental</legend>
-
-		<label for="vehicleID">Vehicle ID</label>
-		<input type="text" name="vehicle" id="vehicleID" />
-		<br><br />
-
-		<label for="custID">Customer ID</label>
-		<input type="text" name="id_number" id="custID" />
-		<br><br />
-
-		<label for="period">Weekly or Daily Rental?</label>
-		<select name="period" id="period">
-		<option>Daily</option>
-		<option>Weekly</option>
-		</select>		        
-		<br><br />
-
-		<label for="daysNo">Number of Days or Weeks</label>
-		<input type="text" name="days_weeks" id="daysNo" />
-		<br><br />
-
-
-   </fieldset>
-
-<div class="submitForm">
-  <input type="submit" name="formSubmit" value="Submit"/>
-
-</div>
-
-</form>
-
-</div>
-	
-<div id="tableViewer">
-</div>
-	
-<script>
-			(function() {
-		var
-			d = document,
-			fieldsets = ['Customer', 'Car', 'Rental'];
-
-		for (var t=0; t<fieldsets.length; t++) {
-			fieldsets[t] = d.getElementById(fieldsets[t]);
-			fieldsets[t].style.display = 'none';
-		}
-		d.getElementById('tableNames').onchange = function(e) {
-			e = e || window.event;
-			var
-				t = e.target || e.srcElement;
-
-			for (var n=0; n<fieldsets.length; n++) {
-				fieldsets[n].style.display = 'none';
-			}
-			if (s = d.getElementById(t.options[t.selectedIndex].value)) {
-				s.style.display = 'block';
-			}
-
-		} // "tableType".onchange
-
-		d.getElementById('insertDataForm').className += ' scriptOn';
-
-	})();
-</script>
-	
-</body>
+        
+        
+	</body>
 </html>
