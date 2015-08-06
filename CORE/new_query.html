@@ -2,6 +2,7 @@
 	<head>
 		<title>Project 2</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 	<style>
 #header {
     background-color:blue;
@@ -65,6 +66,8 @@ table.tables th	{
 	
 	</head>
 	<body>
+        
+<script src="http://malsup.github.com/jquery.form.js"></script> 
 
     <script>
         
@@ -95,15 +98,37 @@ table.tables th	{
 		});
 	}
       
-        function submitForm(form) {
-        console.log(form.cust_name.value);
-        var cust_name = form.cust_name.value;
-        $.ajax({url: "query/insertData.php"
-               }).done(function( html ) {
-            $("#output").append(html);
-        });
-    }
-         //   $("#insertDataForm").hide();
+//        function submitForm(form) {
+//        $.ajax({type: "POST",
+//                url: "query/insertData.php"
+//               }).done(function( html ) {
+//            $("#output").append(html);
+//        });
+//        $("#insertDataForm").hide();
+//
+//    }
+      
+         $(document).ready(function(){
+  
+              $('#insertDataForm').ajaxForm(function() { 
+                alert('form was submitted');
+                $("#insertDataForm").hide();
+
+        }); 
+//       $("#insertDataForm").on("submit", function(e){
+//            e.preventDefault();
+//            $this = $(this);
+//            $.ajax({
+//               type: "POST",
+//               url: $this.attr('action'),
+//               data: $this.serialize(),
+//               success : function(){
+//                  alert('Done');
+//               }
+//            });
+//        });
+    });  
+            
     </script>
 <!--
 ////        function submitForm(form) {
@@ -277,7 +302,7 @@ table.tables th	{
        </fieldset>
 
     <div class="submitForm">
-      <input type="submit" name="formSubmit" value="Submit" onclick="submitForm()" />
+      <input type="submit" name="formSubmit" value="submit" />
 
     </div>
 

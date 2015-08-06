@@ -79,7 +79,7 @@ VehicleID INT(4),
 CustID INT(2),
 Daily VARCHAR(6)				DEFAULT 'No',
 Weekly VARCHAR(6)			DEFAULT 'No',
-StartDate VARCHAR(10),
+StartDate DATE,
 NoOfDays INT						DEFAULT 0,
 NoOfWeeks INT					DEFAULT 0,
 ReturnDate DATE,
@@ -95,7 +95,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
-$sql ="ALTER TABLE car AUTO_INCREMENT=1000;";
+$sql ="ALTER TABLE car AUTO_INCREMENT=1001;";
 
 if ($conn->query($sql) === TRUE) {
     echo "Table car altered successfully<br>";

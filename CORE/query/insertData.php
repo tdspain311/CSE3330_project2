@@ -23,10 +23,12 @@ $StartDate   =  date("Ymd");
 $RentalType  =  $_POST["rental_type"];
 $DaysOrWeeks =  $_POST["days_weeks"];
 
+
 array_walk_recursive($_POST, function (&$val) 
 { 
     $val = trim($val); 
 }); //removes carriage returns from all $_POST variables
+
 
 if(isset($_POST['formSubmit'])){
     
