@@ -81,9 +81,11 @@ table.tables th	{
 		});
 	}
 		function insertRecord() {
+			$("#updateDataForm").hide();
             $("#insertDataForm").show();
 	}
 		function updateRecord() {
+		    $("#insertDataForm").hide();
 			$("#updateDataForm").show();
 	}
 		function deleteRecord() {
@@ -94,11 +96,19 @@ table.tables th	{
       
         $(document).ready(function(){
 			$("#insertDataForm").hide();
+			$('#updateDataForm').hide();
             $('#insertDataForm').ajaxForm({
                 success: function( html ) {
 					$("#output").append(html);
 					viewAllRecords();
 					$("#insertDataForm").hide();
+				}
+			}); 
+			$('#updateDataForm').ajaxForm({
+                success: function( html ) {
+					$("#output").append(html);
+					viewAllRecords();
+					$("#updateDataForm").hide();
 				}
 			}); 
 		});  
@@ -258,12 +268,13 @@ table.tables th	{
 
         <fieldset id="updateTableType">
 
-            <label for="updateTableNames">Select a table to insert data:</label>
+            <label for="updateTableNames">Select a table to update data:</label>
                  <select name="formTableName" id="updateTableNames">
                   <option value="">Select...</option>
                   <option value="Customer">Customer</option>
                   <option value="Car">Car</option>
                   <option value="Rental">Rental</option>
+				  <option value="Rates">Rental Rates</option>
                 </select>
 
         </fieldset>
@@ -333,6 +344,34 @@ table.tables th	{
             <br><br />
 
        </fieldset>
+	   
+	      <fieldset id="updateRates">
+
+          <legend>Rental Rates</legend>
+
+            <label for="updateType">Car Type to update</label>
+            <select name="carType" id="updateType">
+             <option>SUV</option>
+             <option>Compact</option>
+             <option>Medium</option>
+             <option>Large</option>
+             <option>Truck</option>
+             <option>Van</option>
+            </select>
+            <br><br />
+			
+			<label for="updateOption">Daily or Weekly Rates</label>
+            <select name="updateOption" id="updateOption">
+             <option>Daily</option>
+             <option>Weekly</option>
+            </select>
+            <br><br />
+
+            <label for="updateRate">New Rate</label>
+            <input type="text" name="updateRate" id="updateRate" size="5"/>
+            <br><br />
+
+       </fieldset>
 
     <div class="submitForm">
       <input type="submit" name="formSubmit" value="submit" />
@@ -345,7 +384,7 @@ table.tables th	{
             (function() {
             var
                 d = document,
-                fieldsets = ['updateCustomer', 'updateCar', 'updateRental'];
+                fieldsets = ['updateCustomer', 'updateCar', 'updateRental', 'updateRates'];
 
             for (var t=0; t<fieldsets.length; t++) {
                 fieldsets[t] = d.getElementById(fieldsets[t]);
@@ -359,7 +398,7 @@ table.tables th	{
                 for (var n=0; n<fieldsets.length; n++) {
                     fieldsets[n].style.display = 'none';
                 }
-                if (s = d.getElementById(t.options[t.selectedIndex].value)) {
+                if (s = d.getElementById('update' + t.options[t.selectedIndex].value)) {
                     s.style.display = 'block';
                 }
 
