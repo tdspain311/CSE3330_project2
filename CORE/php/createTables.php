@@ -77,11 +77,10 @@ $sql = "CREATE TABLE rental
 Status VARCHAR(12) 			DEFAULT 'Scheduled',
 VehicleID INT(4),
 CustID INT(2),
-Daily VARCHAR(6)				DEFAULT 'No',
-Weekly VARCHAR(6)			DEFAULT 'No',
-StartDate VARCHAR(10),
+Period VARCHAR(10),		
+StartDate DATE,
 NoOfDays INT						DEFAULT 0,
-NoOfWeeks INT					DEFAULT 0,
+NoOfWeeks INT						DEFAULT 0,
 ReturnDate DATE,
 AmountDue decimal(10,2),
 PRIMARY KEY (Status,VehicleID,CustID),
@@ -95,6 +94,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
+//ALTER TO TABLES
 $sql ="ALTER TABLE car AUTO_INCREMENT=1000;";
 
 if ($conn->query($sql) === TRUE) {
