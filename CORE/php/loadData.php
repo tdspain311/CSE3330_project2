@@ -120,7 +120,8 @@ while(!feof($myfile)){
 	list($Status, 
 		 $VehicleID, 
 		 $CustID,
-         $Period,
+         $Daily,
+		 $Weekly,
          $StartDate,
          $NoOfDays,
          $NoOfWeeks)=explode(",", $newstring);
