@@ -7,7 +7,7 @@ $dbname = "db_rental";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-// sql to create table
+//SQL to create customer schema
 $sql = "CREATE TABLE customer
 (
 IdNo INT                				NOT NULL AUTO_INCREMENT,
@@ -22,6 +22,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
+//SQL to create car schema
 $sql = "CREATE TABLE car
 (
 VehicleID INT(5)           			NOT NULL AUTO_INCREMENT,
@@ -36,9 +37,8 @@ if ($conn->query($sql) === TRUE) {
 } else {
     echo "Error creating table: " . $conn->error . "<br>";
 }
-//$sql = "ALTER TABLE car AUTO_INCREMENT=1001;";
 
-
+//SQL to create type schema
 $sql = "CREATE TABLE type
 (
 TypeName varchar(10),
@@ -47,14 +47,13 @@ WeeklyRate decimal(10,2),
 PRIMARY KEY (TypeName)
 );";
 
-//FOREIGN KEY (TypeName) REFERENCES car(Type)
-
 if ($conn->query($sql) === TRUE) {
     echo "Table type created successfully<br>";
 } else {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
+//SQL to create car type schema
 $sql = "CREATE TABLE car_type
 (
 VID int,
@@ -64,14 +63,13 @@ FOREIGN KEY (VID) REFERENCES car(VehicleID),
 FOREIGN KEY (TName) REFERENCES type(TypeName)
 );";
 
-//FOREIGN KEY (TypeName) REFERENCES car(Type)
-
 if ($conn->query($sql) === TRUE) {
     echo "Table car_type created successfully<br>";
 } else {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
+//SQL to create rental schema
 $sql = "CREATE TABLE rental
 (
 Status VARCHAR(12) 			DEFAULT 'Scheduled',
@@ -83,7 +81,7 @@ StartDate DATE,
 NoOfDays INT						DEFAULT 0,
 NoOfWeeks INT					DEFAULT 0,
 ReturnDate DATE,
-AmountDue decimal(10,2),
+AmountDue decimal(10,2)		DEFAULT 0.00,
 PRIMARY KEY (Status,VehicleID,CustID),
 FOREIGN KEY (VehicleID) REFERENCES car(VehicleID),
 FOREIGN KEY (CustID) REFERENCES customer(IdNo)
@@ -95,6 +93,7 @@ if ($conn->query($sql) === TRUE) {
     echo "Error creating table: " . $conn->error . "<br>";
 }
 
+//SQL for Alters to tables
 $sql ="ALTER TABLE car AUTO_INCREMENT=1001;";
 
 if ($conn->query($sql) === TRUE) {
