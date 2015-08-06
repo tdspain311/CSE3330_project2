@@ -7,7 +7,6 @@ $dbname = "db_rental";
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
 
-//**TESTING**
 //TRIGGERS
 $sql = "CREATE TRIGGER ReturnDate_Insert BEFORE INSERT ON rental
 FOR EACH ROW 

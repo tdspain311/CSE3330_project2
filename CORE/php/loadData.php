@@ -11,7 +11,7 @@ if ($conn->connect_error) {
     //die("Connection failed: " . $conn->connect_error);
     echo "Connection error<br>";
 } 
-
+//Customers Loader
 echo "<br/> Load Customer.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Customers.csv", "r") or die("Unable to openfile!");
@@ -25,7 +25,7 @@ while(!feof($myfile)){
 		 $Phone)=explode(",", $newstring);
 		 
 		
-	$sql = "INSERT INTO customer(Name,Phone) VALUES (" . $Name . ", " . $Phone . ");";
+	$sql = "INSERT INTO customer (Name,Phone) VALUES (" . $Name . ", " . $Phone . ");";
 	
 	if ($conn->query($sql) === TRUE) {
 		echo $Name . ", " . $Phone . "  added successfully<br>";
@@ -37,7 +37,6 @@ while(!feof($myfile)){
 fflush($myfile);
 
 //Cars Loader
-
 echo "<br/> Load Cars.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Cars.csv", "r") or die("Unable to openfile!");
@@ -46,23 +45,12 @@ while(!feof($myfile)){
     $line = fgets($myfile);
 
     $newstring = preg_replace("/[\r\n]/","",$line);
-    //echo($newstring);
  
     list($Model, 
 		 $Year,  
 		 $Availability)=explode(",", $newstring);
-		 
-	//echo $VehicleID . $Model . $Year . $Type . $Availability . "<br>";
-    // $sql = "ALTER TABLE car AUTO_INCREMENT=1001;";
-    // $conn->query($sql);
-//    
-//    if ($conn->query($sql) === TRUE) {
-//		echo "Car table altered successfully<br>";
-//	} else {
-//		echo "Error adding data: " . $conn->error . "<br>";
-//	}
 
-	$sql = "INSERT INTO car(Model,Year,Availability) VALUES (" . $Model . ", " . $Year . ", " . $Availability . ");";
+	$sql = "INSERT INTO car (Model,Year,Availability) VALUES (" . $Model . ", " . $Year . ", " . $Availability . ");";
 
 	if ($conn->query($sql) === TRUE) {
 		echo $Model . ", " . $Year . ", " . $Availability . " added successfully<br>";
@@ -75,7 +63,6 @@ while(!feof($myfile)){
 fflush($myfile);
 
 //type Loader
-
 echo "<br/> Load Type.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Type.csv", "r") or die("Unable to openfile!");
@@ -89,7 +76,6 @@ while(!feof($myfile)){
 		 $WeeklyRate)=explode(",", $newstring);
 		 
 	$sql = "INSERT INTO type VALUES (" . $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . ");";
-	//echo $VehicleID . $TypeName . $DailyRate . $WeeklyRate . "<br>";
     
 	if ($conn->query($sql) === TRUE) {
 		echo $TypeName . ", " . $DailyRate . ", " . $WeeklyRate . "  added successfully<br>";
@@ -100,7 +86,6 @@ while(!feof($myfile)){
 fflush($myfile);
 
 //CarType Loader
-
 echo "<br/> Load CarType.csv <br/>";
 
 $myfile = fopen("../../Input_Data/CarType.csv", "r") or die("Unable to openfile!");
@@ -123,7 +108,6 @@ while(!feof($myfile)){
 fflush($myfile);
 
 //Rental Loader
-
 echo "<br/> Load Rental.csv <br/>";
 
 $myfile = fopen("../../Input_Data/Rental.csv", "r") or die("Unable to openfile!");
@@ -136,8 +120,7 @@ while(!feof($myfile)){
 	list($Status, 
 		 $VehicleID, 
 		 $CustID,
-         $Daily,
-         $Weekly,
+         $Period,
          $StartDate,
          $NoOfDays,
          $NoOfWeeks)=explode(",", $newstring);

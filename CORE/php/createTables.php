@@ -10,7 +10,7 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 //SQL to create customer schema
 $sql = "CREATE TABLE customer
 (
-IdNo INT                				NOT NULL AUTO_INCREMENT,
+IdNo INT                					NOT NULL AUTO_INCREMENT,
 Name varchar(50)					NOT NULL,
 Phone varchar(15),
 PRIMARY KEY (IdNo)
@@ -27,7 +27,7 @@ $sql = "CREATE TABLE car
 (
 VehicleID INT(5)           			NOT NULL AUTO_INCREMENT,
 Model VARCHAR (70)			NOT NULL,
-Year INT			    				NOT NULL,
+Year INT			    					NOT NULL,
 Availability VARCHAR(10) 		DEFAULT 'Yes',
 PRIMARY KEY (VehicleID)
 );";
@@ -75,11 +75,15 @@ $sql = "CREATE TABLE rental
 Status VARCHAR(12) 			DEFAULT 'Scheduled',
 VehicleID INT(4),
 CustID INT(2),
+<<<<<<< HEAD
 Daily VARCHAR(6)				DEFAULT 'No',
 Weekly VARCHAR(6)			DEFAULT 'No',
+=======
+Period VARCHAR(10),		
+>>>>>>> master
 StartDate DATE,
 NoOfDays INT						DEFAULT 0,
-NoOfWeeks INT					DEFAULT 0,
+NoOfWeeks INT						DEFAULT 0,
 ReturnDate DATE,
 AmountDue decimal(10,2)		DEFAULT 0.00,
 PRIMARY KEY (Status,VehicleID,CustID),
