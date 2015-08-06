@@ -13,7 +13,7 @@
     line-height:30px;
     background-color:#eeeeee;
     height:350px;
-    width:25%;
+    width:20%;
     float:left;
     padding-left:5px;	      
 }
@@ -80,7 +80,8 @@ table.tables th	{
 	}
 	function showTables() {
 	$.ajax({url: "CORE/php/viewTables.php"}).done(function( html ) {
-			$("#tableViewer"). append(html);
+			$('#tableViewer').empty();
+			$('#tableViewer'). append(html);
 		});
 	}
 	function dropDB() {
@@ -122,7 +123,7 @@ table.tables th	{
 						<td><a href=# onclick="showTables()">Show Tables</a></td>
 					</tr>
 					<tr>
-						<td><a href="CORE/new_query.html">Query Database</a></td>
+						<td><a href="CORE/query.html">Query Database</a></td>
 					</tr>
 					<tr>
 						<td><a href=# onclick="dropDB()">Drop Database</a></td>
