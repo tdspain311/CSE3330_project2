@@ -10,25 +10,25 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 echo "INSERT INFO";
  
-$table = $_POST["formTableName"];
-$Name = $_POST["cust_name"];
-$Phone = $_POST["phone_num"];
-$VID = $_POST["car_model"];
-$Model = $_POST["car_model"];
-$CarType = $_POST["carType"];
-$Year = $_POST["year_model"];
-$RentalVID = $_POST["vid"];
-$RentalCID = $_POST["cid"];
-$StartDate = date("Ymd");
-$Daily = $_POST["daily_rental"];
-$Weekly = $_POST["weekly_rental"];
-$NoOfDays = $_POST["days"];
-$NoOfWeeks = $_POST["weeks"];
+$table       =  $_POST["formTableName"];
+$Name        =  $_POST["cust_name"];
+$Phone       =  $_POST["phone_num"];
+$VID         =  $_POST["car_model"];
+$Model       =  $_POST["car_model"];
+$CarType     =  $_POST["carType"];
+$Year        =  $_POST["year_model"];
+$RentalVID   =  $_POST["vid"];
+$RentalCID   =  $_POST["cid"];
+$StartDate   =  date("Ymd");
+$RentalType  =  $_POST["rental_type"];
+$DaysOrWeeks =  $_POST["days_weeks"];
 
-echo $table,$Name,$Phone;
+array_walk_recursive($_POST, function (&$val) 
+{ 
+    $val = trim($val); 
+}); //removes carriage returns from all $_POST variables
 
 if(isset($_POST['formSubmit'])){
-    echo $table, $Name, $Phone;
     
     $errorMessage = "";
     
@@ -69,11 +69,28 @@ if(isset($_POST['formSubmit'])){
             break;
           case "Rental": 
             echo "Table Rental selected"; 
-            $sql = "INSERT INTO rental(Status,VehicleID,CustID,Daily,Weekly,StartDate,NoOfDays,NoOfWeeks) VALUES ('Scheduled','$RentalVID','$RentalCID','$Daily','$Weekly','$StartDate','$NoOfDays','$NoOfWeeks')";
-            if ($conn->query($sql) === TRUE) {
-                echo $Status . ", " . $RentalVID . ", " . $RentalCID . "," . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . "  added successfully<br>";
-            } else {
-                echo "Error adding data: " . $conn->error . "<br>";
+            if($RentalType == "Daily"){
+                 $sql = "INSERT INTO rental(Status,VehicleID,CustID,Daily,Weekly,StartDate,NoOfDays,NoOfWeeks) VALUES ('Scheduled','$RentalVID','$RentalCID','Yes','No','$StartDate','$DaysOrWeeks','0')";
+                    if ($conn->query($sql) === TRUE) {
+                        echo $Status . ", "
+                            . $RentalVID . ", " 
+                            . $RentalCID . "," 
+                            . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . "  added successfully<br>";
+                    } else {
+                        echo "Error adding data: " . $conn->error . "<br>";
+                    }
+            
+            }
+            else{
+                    $sql = "INSERT INTO rental(Status,VehicleID,CustID,Daily,Weekly,StartDate,NoOfDays,NoOfWeeks) VALUES ('Scheduled','$RentalVID','$RentalCID','No','Yes','$StartDate','0','$DaysOrWeeks')";
+                    if ($conn->query($sql) === TRUE) {
+                        echo $Status . ", "
+                            . $RentalVID . ", " 
+                            . $RentalCID . "," 
+                            . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . "  added successfully<br>";
+                    } else {
+                        echo "Error adding data: " . $conn->error . "<br>";
+                    }
             }
 
             break;
