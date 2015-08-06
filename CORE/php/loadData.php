@@ -140,17 +140,12 @@ while(!feof($myfile)){
          $Weekly,
          $StartDate,
          $NoOfDays,
-         $NoOfWeeks,
-         $ReturnDate,
-         $AmountDue)=explode(",", $newstring);
-    
-   // echo $Status . $VehicleID . $CustID . $Daily . $Weekly . $StartDate . $NoOfDays . $NoOfWeeks . $ReturnDate . $AmountDue . "<br>";
-
+         $NoOfWeeks)=explode(",", $newstring);
 			 
-	$sql = "INSERT INTO rental VALUES (" . $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . ", " . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . ", " . $ReturnDate . ", " . $AmountDue . ");";
+	$sql = "INSERT INTO rental (Status, VehicleID, CustID, Daily, Weekly, StartDate, NoOfDays, NoOfWeeks) VALUES (" . $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . ", " . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . ");";
 	
 	if ($conn->query($sql) === TRUE) {
-		echo $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . ", " . $ReturnDate . ", " . $AmountDue . "  added successfully<br>";
+		echo $Status . ", " . $VehicleID . ", " . $CustID . "," . $Daily . "," . $Weekly . "," . $StartDate . "," . $NoOfDays . "," . $NoOfWeeks . "  added successfully<br>";
 	} else {
 		echo "Error adding data: " . $conn->error . "<br>";
 	}
