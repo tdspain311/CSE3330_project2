@@ -2,7 +2,7 @@
 	<head>
 		<title>Project 2</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-
+	<script src="http://malsup.github.com/jquery.form.js"></script> 
 	<style>
 #header {
     background-color:blue;
@@ -67,7 +67,7 @@ table.tables th	{
 	</head>
 	<body>
         
-<script src="http://malsup.github.com/jquery.form.js"></script> 
+
 
     <script>
         
@@ -76,7 +76,7 @@ table.tables th	{
     });
    
 	function rentalRecords() {
-		$.ajax({url: "query/rentalRecords.php"}).done(function( html ) {
+		$.ajax({url: "query/records.php"}).done(function( html ) {
 			$("#tableViewer").append(html);
 		});
 	}
@@ -98,36 +98,14 @@ table.tables th	{
 		});
 	}
       
-//        function submitForm(form) {
-//        $.ajax({type: "POST",
-//                url: "query/insertData.php"
-//               }).done(function( html ) {
-//            $("#output").append(html);
-//        });
-//        $("#insertDataForm").hide();
-//
-//    }
-      
-         $(document).ready(function(){
-  
-              $('#insertDataForm').ajaxForm(function() { 
-                alert('form was submitted');
-                $("#insertDataForm").hide();
-
-        }); 
-//       $("#insertDataForm").on("submit", function(e){
-//            e.preventDefault();
-//            $this = $(this);
-//            $.ajax({
-//               type: "POST",
-//               url: $this.attr('action'),
-//               data: $this.serialize(),
-//               success : function(){
-//                  alert('Done');
-//               }
-//            });
-//        });
-    });  
+        $(document).ready(function(){
+			$("#insertDataForm").hide();
+            $('#insertDataForm').ajaxForm({
+                success: function( html ) {
+					$("#output").append(html);
+				}
+			}); 
+		});  
             
     </script>
 <!--
