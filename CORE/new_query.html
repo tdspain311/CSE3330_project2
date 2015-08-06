@@ -95,7 +95,15 @@ table.tables th	{
 		});
 	}
       
-
+        function submitForm(form) {
+        console.log(form.cust_name.value);
+        var cust_name = form.cust_name.value;
+        $.ajax({url: "query/insertData.php"
+               }).done(function( html ) {
+            $("#output").append(html);
+        });
+    }
+         //   $("#insertDataForm").hide();
     </script>
 <!--
 ////        function submitForm(form) {
@@ -108,6 +116,8 @@ table.tables th	{
 ////            $("#output").append(html);
 ////        });
 ////         //   $("#insertDataForm").hide();
+-->
+<!--
 //        
 //        $('#insertDataForm').submit(function() {
 //            var myValues = {tableName, CustomerName, Phone};
@@ -247,33 +257,27 @@ table.tables th	{
             <input type="text" name="cid" id="custID" />
             <br><br />
 
-            <label for="daily">Daily Rental?</label>
-            <select name="daily_rental" id="daily">
-            <option>Yes</option>
-            <option>No</option>
+            <label for="rentalType">Type of Rental</label>
+            <select name="rental_type" id="rentalType">
+            <option>Daily</option>
+            <option>Weekly</option>
             </select>		        
             <br><br />
 
-            <label for="weekly">Weekly Rental?</label>
-            <select name="weekly_rental" id="weekly">
-            <option>Yes</option>
-            <option>No</option>
-            </select>		        
+            <label for="dwNumber">Number of Days/Weeks</label>
+            <input type="text" name="days_weeks" id="dwNumber" />
             <br><br />
 
-            <label for="daysNo">Number of Days</label>
-            <input type="text" name="days" id="daysNo" />
-            <br><br />
-
+<!--
             <label for="weeksNo">Number of Weeks</label>
             <input type="text" name="weeks" id="weeksNo" />
             <br><br />
-
+-->
 
        </fieldset>
 
     <div class="submitForm">
-      <input type="submit" name="formSubmit" value="Submit" />
+      <input type="submit" name="formSubmit" value="Submit" onclick="submitForm()" />
 
     </div>
 
