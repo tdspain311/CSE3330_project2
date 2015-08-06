@@ -75,12 +75,8 @@ $sql = "CREATE TABLE rental
 Status VARCHAR(12) 			DEFAULT 'Scheduled',
 VehicleID INT(4),
 CustID INT(2),
-<<<<<<< HEAD
 Daily VARCHAR(6)				DEFAULT 'No',
 Weekly VARCHAR(6)			DEFAULT 'No',
-=======
-Period VARCHAR(10),		
->>>>>>> master
 StartDate DATE,
 NoOfDays INT						DEFAULT 0,
 NoOfWeeks INT						DEFAULT 0,
