@@ -12,7 +12,12 @@ $conn = mysqli_connect($servername, $username, $password, $dbname);
 $sql = "CREATE TRIGGER ReturnDate_Insert BEFORE INSERT ON rental
 FOR EACH ROW 
 BEGIN
-SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL 1 DAY);
+    IF (NEW.NoOfDays > 0) THEN
+        SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL new.NoOfDays DAY);
+    ELSE
+        SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL new.NoOfWeeks WEEK);
+    END IF;
+    
 END;";
 
 if ($conn->query($sql) === TRUE) {
@@ -24,7 +29,12 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TRIGGER ReturnDate_Update BEFORE UPDATE ON rental
 FOR EACH ROW 
 BEGIN
-SET NEW.ReturnDate = DATE_ADD(StartDate, INTERVAL 1 DAY);
+    IF (NEW.NoOfDays > 0) THEN
+        SET NEW.ReturnDate = DATE_ADD(StartDate, INTERVAL new.NoOfDays DAY);
+    ELSE
+        SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL new.NoOfWeeks WEEK);
+    END IF;
+
 END;";
 
 if ($conn->query($sql) === TRUE) {
