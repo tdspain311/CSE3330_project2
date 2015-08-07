@@ -68,60 +68,56 @@ table.tables th	{
 	<body>
 
     <script>
-        
-    $(document).ready(function(){
-        $("#insertDataForm").hide();
+	
+	$(document).ready(function(){
+		$("#insertDataForm").hide();
 		$('#updateDataForm').hide();
-    });
-   
+		$('#deleteDataForm').hide();
+		$('#insertDataForm').ajaxForm({
+			success: function( html ) {
+				$("#output").append(html);
+				viewAllRecords();
+				$("#insertDataForm").hide();
+			}
+		}); 
+		$('#updateDataForm').ajaxForm({
+			success: function( html ) {
+				$("#output").append(html);
+				viewAllRecords();
+				$("#updateDataForm").hide();
+			}
+		}); 
+		$('#deleteDataForm').ajaxForm({
+			success: function( html ) {
+				$("#output").append(html);
+				viewAllRecords();
+				$("#deleteDataForm").hide();
+			}
+		}); 
+	});  
+	
 	function viewAllRecords() {
 		$.ajax({url: "query/records.php"}).done(function( html ) {
 			$('#tableViewer').empty();
 			$("#tableViewer").append(html);
 		});
 	}
-		function insertRecord() {
+	function insertRecord() {
 			$("#updateDataForm").hide();
 			$("#deleteDataForm").hide();
             $("#insertDataForm").show();
 	}
-		function updateRecord() {
+	function updateRecord() {
 		    $("#insertDataForm").hide();
 			$("#deleteDataForm").hide();
 			$("#updateDataForm").show();
 	}
-		function deleteRecord() {
+	function deleteRecord() {
 		    $("#insertDataForm").hide();
 			$("#updateDataForm").hide();
 			$("#deleteDataForm").show();
 	}
       
-        $(document).ready(function(){
-			$("#insertDataForm").hide();
-			$('#updateDataForm').hide();
-			$('#deleteDataForm').hide();
-            $('#insertDataForm').ajaxForm({
-                success: function( html ) {
-					$("#output").append(html);
-					viewAllRecords();
-					$("#insertDataForm").hide();
-				}
-			}); 
-			$('#updateDataForm').ajaxForm({
-                success: function( html ) {
-					$("#output").append(html);
-					viewAllRecords();
-					$("#updateDataForm").hide();
-				}
-			}); 
-			$('#deleteDataForm').ajaxForm({
-                success: function( html ) {
-					$("#output").append(html);
-					viewAllRecords();
-					$("#deleteDataForm").hide();
-				}
-			}); 
-		});  
             
     </script>
 		<div id="header">
@@ -379,7 +375,7 @@ table.tables th	{
        </fieldset>
 
     <div class="submitForm">
-      <input type="submit" name="formSubmit" value="Submit" />
+      <input type="submit" name="formSubmit" value="Submit"/>
 
     </div>
 
