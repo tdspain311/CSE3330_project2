@@ -57,6 +57,14 @@ if(isset($_POST['formTableName'])) {
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
+			
+			$sql = "UPDATE car SET Availability='No' WHERE VehicleID=" . $param1 . ";";
+			
+			if ($conn->query($sql) === TRUE) {
+				echo "Vehicle '" . $param1 . "' is no longer available<br>";
+			} else {
+				echo "Error updating record: " . $conn->error . "<br>";
+			}
 			break;
 	}
 }
