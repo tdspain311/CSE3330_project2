@@ -32,6 +32,14 @@ if(isset($_POST['formTableName'])) {
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
+			$param3 = $_POST['carType'];
+			$sql = "INSERT INTO car_type VALUES ((SELECT VehicleID FROM car WHERE Model='" . $param1 . "' AND Year=" . $param2 . "), UPPER('" . $param3 . "'));";
+			
+			if ($conn->query($sql) === TRUE) {
+				echo $param3 . ", entered into table 'car_type' successfully<br>";
+			} else {
+				echo "Error creating record: " . $conn->error . "<br>";
+			}
 			break;
 		case "Rental":
 			$param1 = $_POST['vid'];

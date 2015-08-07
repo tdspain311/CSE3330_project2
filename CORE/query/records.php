@@ -105,5 +105,19 @@ if ($result->num_rows > 0) {
     echo "0 results<br>";
 }
 
+$sql = "SELECT VehicleID, Model, Year, Availability, DailyRate, WeeklyRate FROM car, car_type, type WHERE car_type.TName = 'VAN' AND car_type.VID = car.VehicleID AND type.TypeName = car_type.TName";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table class='tables'><tr><th colspan='6'>Van</th></tr><tr><th>VehicleID</th><th>Model</th><th>Year</th><th>Availability</th><th>DailyRate</th><th>WeeklyRate</th</tr>";
+    // output data of each row
+    while($row = $result->fetch_assoc()) {
+        echo "<tr><td>".$row["VehicleID"]."</td><td>".$row["Model"]."</td><td>".$row["Year"]."</td><td>".$row["Availability"]."</td><td>".$row["DailyRate"]."</td><td>".$row["WeeklyRate"]."</td></tr>";
+    }
+    echo "</table><br>";
+} else {
+    echo "0 results<br>";
+}
+
 $conn->close();
 ?>
