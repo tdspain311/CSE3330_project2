@@ -17,7 +17,7 @@ if(isset($_POST['formTableName'])) {
 			$sql = "INSERT INTO " . $table . " (Name, Phone) VALUES ( '" . $param1 . "', '" . $param2 . "');";
 
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . ", " . $param2 . ", entered into table '" . $table . "' successfully<br>";
+				echo $param1 . ", " . $param2 . " entered into table '" . $table . "' successfully<br>";
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
@@ -28,7 +28,7 @@ if(isset($_POST['formTableName'])) {
 			$sql = "INSERT INTO " . $table . " (Model, Year) VALUES ( '" . $param1 . "', '" . $param2 . "');";
 
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . ", " . $param2 . ", entered into table '" . $table . "' successfully<br>";
+				echo $param1 . ", " . $param2 . " entered into table '" . $table . "' successfully<br>";
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
@@ -36,7 +36,7 @@ if(isset($_POST['formTableName'])) {
 			$sql = "INSERT INTO car_type VALUES ((SELECT VehicleID FROM car WHERE Model='" . $param1 . "' AND Year=" . $param2 . "), UPPER('" . $param3 . "'));";
 			
 			if ($conn->query($sql) === TRUE) {
-				echo $param3 . ", entered into table 'car_type' successfully<br>";
+				echo $param3 . " entered into table 'car_type' successfully<br>";
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
@@ -53,7 +53,7 @@ if(isset($_POST['formTableName'])) {
 				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Weekly, StartDate, NoOfWeeks) VALUES ( " . $param1 . ", " . $param2 . ", 'Yes', CURDATE()," . $param4 . ");";
 			}
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . ", " . $param2 . ", " . $param3 . ", " . $param4 . ", " . $param5 . ", " . $param6 . ", entered into table '" . $table . "' successfully<br>";
+				echo $param1 . ", " . $param2 . ", " . $param3 . ", " . $param4 . ", " . $param5 . ", " . $param6 . " entered into table '" . $table . "' successfully<br>";
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
