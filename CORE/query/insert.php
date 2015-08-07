@@ -53,7 +53,7 @@ if(isset($_POST['formTableName'])) {
 				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Weekly, StartDate, NoOfWeeks) VALUES ( " . $param1 . ", " . $param2 . ", 'Yes', CURDATE()," . $param4 . ");";
 			}
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . ", " . $param2 . ", " . $param3 . ", " . $param4 . ", " . $param5 . ", " . $param6 . " entered into table '" . $table . "' successfully<br>";
+				echo $param1 . ", " . $param2 . ", " . $param3 . ", " . $param4 . " entered into table '" . $table . "' successfully<br>";
 			} else {
 				echo "Error creating record: " . $conn->error . "<br>";
 			}
