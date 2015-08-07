@@ -12,9 +12,9 @@ $sql = "CREATE TRIGGER ReturnDate_Insert BEFORE INSERT ON rental
 FOR EACH ROW 
 BEGIN
     IF (NEW.NoOfDays > 0) THEN
-        SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL new.NoOfDays DAY);
+        SET NEW.ReturnDate = DATE_ADD(NEW.StartDate, INTERVAL NEW.NoOfDays DAY);
     ELSE
-        SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL new.NoOfWeeks WEEK);
+        SET NEW.ReturnDate = DATE_ADD(NEW.StartDate, INTERVAL NEW.NoOfWeeks WEEK);
     END IF;
     
 END;";
@@ -29,19 +29,26 @@ $sql = "CREATE TRIGGER ReturnDate_Update BEFORE UPDATE ON rental
 FOR EACH ROW 
 BEGIN
     IF (NEW.NoOfDays > 0) THEN
-        SET NEW.ReturnDate = DATE_ADD(StartDate, INTERVAL new.NoOfDays DAY);
+        SET NEW.ReturnDate = DATE_ADD(NEW.StartDate, INTERVAL NEW.NoOfDays DAY);
     ELSE
-        SET NEW.ReturnDate = DATE_ADD(new.StartDate, INTERVAL new.NoOfWeeks WEEK);
+        SET NEW.ReturnDate = DATE_ADD(NEW.StartDate, INTERVAL NEW.NoOfWeeks WEEK);
     END IF;
 
 END;";
 
-if ($conn->query($sql) === TRUE) {
-    echo "Table trigger 'ReturnDate_Update' created successfully<br>";
-} else {
-    echo "Error creating trigger: " . $conn->error . "<br>";
-}
+//**TESTING**
+// if ($conn->query($sql) === TRUE) {
+    // echo "Table trigger 'ReturnDate_Update' created successfully<br>";
+// } else {
+    // echo "Error creating trigger: " . $conn->error . "<br>";
+// }
+
+// $sql = "CREATE TRIGGER CalculateAmount_Update AFTER INSERT ON rental
+// FOR EACH ROW
+// BEGIN
+// IF
+	// (NEW.NoOfDays > 0) THEN
+//		INSERT INTO rental (AmountDue) VALUES (NEW.NoOfDays * (SELECT DailyRate FROM type WHERE )"
 
 $conn->close();
-
 ?>
