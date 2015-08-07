@@ -1,47 +1,51 @@
-CREATE TABLE customer 
+CREATE TABLE customer
 (
-IdNo int 			NOT NULL,
+IdNo INT                	NOT NULL AUTO_INCREMENT,
 Name varchar(50)		NOT NULL,
 Phone varchar(15),
-CONSTRAINT cust_pk Primary Key (IdNo)
+PRIMARY KEY (IdNo)
 );
 
 CREATE TABLE car
 (
-VehicleID int			NOT NULL,
-Model varchar (20)		NOT NULL,
-Year int			NOT NULL,
-Type varchar(10)		NOT NULL,
-Availability varchar(10),
-CONSTRAINT car_pk Primary Key (VehicleID)
+VehicleID INT(5)           	NOT NULL AUTO_INCREMENT,
+Model VARCHAR (70)		NOT NULL,
+Year INT			NOT NULL,
+Availability VARCHAR(10) 	DEFAULT 'Yes',
+PRIMARY KEY (VehicleID)
+);
+
+CREATE TABLE type
+(
+TypeName varchar(10),
+DailyRate decimal(10,2),
+WeeklyRate decimal(10,2),
+PRIMARY KEY (TypeName)
 );
 
 CREATE TABLE car_type
 (
-VehicleID int,
-TypeName varchar(20),
-DailyRate decimal(10,2),
-WeeklyRate decimal(10,2),
-CONSTRAINT type_pk Primary Key (VehicleID,TypeName),
-CONSTRAINT type_fk1 Foreign Key (VehicleID) REFERENCES car(VehicleID),
-CONSTRAINT type_fk2 Foreign Key (TypeName) REFERENCES car(Type)
+VID int,
+TName varchar(10),
+PRIMARY KEY (VID,TName),
+FOREIGN KEY (VID) REFERENCES car(VehicleID),
+FOREIGN KEY (TName) REFERENCES type(TypeName)
 );
 
 CREATE TABLE rental
 (
-Status varchar(10),
-VehicleID int,
-CustID int,
-Daily varchar(5),
-Weekly varchar(5),
-StartDate date,
-NoOfDays int,
-NoOfWeeks int,
-ReturnDate date,
-AmountDue decimal(10,2),
-CONSTRAINT rental_pk Primary Key (VehicleID,CustID,Status),
-CONSTRAINT rental_fk1 Foreign Key (VehicleID) REFERENCES car(VehicleID),
-CONSTRAINT rental_fk2 Foreign Key (CustID) REFERENCES customer(IdNo)
+Status VARCHAR(12) 		DEFAULT 'Scheduled',
+VehicleID INT(4),
+CustID INT(2),
+Daily VARCHAR(6)		DEFAULT 'No',
+Weekly VARCHAR(6)		DEFAULT 'No',
+StartDate DATE,
+NoOfDays INT			DEFAULT 0,
+NoOfWeeks INT			DEFAULT 0,
+ReturnDate DATE,
+AmountDue decimal(10,2)		DEFAULT 0.00,
+PRIMARY KEY (Status,VehicleID,CustID),
+FOREIGN KEY (VehicleID) REFERENCES car(VehicleID),
+FOREIGN KEY (CustID) REFERENCES customer(IdNo)
 );
-
 COMMIT;
