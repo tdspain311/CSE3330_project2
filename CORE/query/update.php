@@ -14,31 +14,37 @@ if(isset($_POST['formTableName'])) {
 		case "Customer":
 			$param1 = $_POST['cust_name'];
 			$param2 = $_POST['phone_num'];
-			$sql = "INSERT INTO " . $table . " (Name, Phone) VALUES ( '" . $param1 . "', '" . $param2 . "');";
+			$condition = $_POST['cust_id'];
+			
+			$sql = "UPDATE " . $table . " SET Name='" . $param1 . "', Phone='" . $param2 . "' WHERE IdNo=" . $condition . ";";
 
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . ", " . $param2 . " entered into table '" . $table . "' successfully<br>";
+				echo $param1 . ", " . $param2 . " updated into table '" . $table . "' for " . $condition . " successfully<br>";
 			} else {
-				echo "Error creating record: " . $conn->error . "<br>";
+				echo "Error updating record: " . $conn->error . "<br>";
 			}
 			break;
 		case "Car":
+			
 			$param1 = $_POST['car_model'];
 			$param2 = $_POST['year_model'];
-			$sql = "INSERT INTO " . $table . " (Model, Year) VALUES ( '" . $param1 . "', '" . $param2 . "');";
+			$condition = $_POST['car_vid'];
+			
+			$sql = "UPDATE " . $table . " SET Model='" . $param1 . "', Year=" . $param2 . " WHERE VehicleID=" . $condition . ";";
 
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . ", " . $param2 . " entered into table '" . $table . "' successfully<br>";
+				echo $param1 . ", " . $param2 . " updated into table '" . $table . "' for " . $condition . " successfully<br>";
 			} else {
-				echo "Error creating record: " . $conn->error . "<br>";
+				echo "Error updating record: " . $conn->error . "<br>";
 			}
+			
 			$param3 = $_POST['carType'];
-			$sql = "INSERT INTO car_type VALUES ((SELECT VehicleID FROM car WHERE Model='" . $param1 . "' AND Year=" . $param2 . "), UPPER('" . $param3 . "'));";
+			$sql = "UPDATE car_type SET TName=UPPER('" . $param3 . "') WHERE VID=(SELECT VehicleID FROM car WHERE Model='" . $param1 . "' AND Year=" . $param2 . ");";
 			
 			if ($conn->query($sql) === TRUE) {
-				echo $param3 . " entered into table 'car_type' successfully<br>";
+				echo $param3 . " updated into table 'car_type' successfully<br>";
 			} else {
-				echo "Error creating record: " . $conn->error . "<br>";
+				echo "Error updating record: " . $conn->error . "<br>";
 			}
 			break;
 		case "Rental":
