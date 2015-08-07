@@ -82,21 +82,24 @@ table.tables th	{
 	}
 		function insertRecord() {
 			$("#updateDataForm").hide();
+			$("#deleteDataForm").hide();
             $("#insertDataForm").show();
 	}
 		function updateRecord() {
 		    $("#insertDataForm").hide();
+			$("#deleteDataForm").hide();
 			$("#updateDataForm").show();
 	}
 		function deleteRecord() {
-		$.ajax({url: "query/delete.php"}).done(function( html ) {
-			$("#output").append(html);
-		});
+		    $("#insertDataForm").hide();
+			$("#updateDataForm").hide();
+			$("#deleteDataForm").show();
 	}
       
         $(document).ready(function(){
 			$("#insertDataForm").hide();
 			$('#updateDataForm').hide();
+			$('#deleteDataForm').hide();
             $('#insertDataForm').ajaxForm({
                 success: function( html ) {
 					$("#output").append(html);
@@ -109,6 +112,13 @@ table.tables th	{
 					$("#output").append(html);
 					viewAllRecords();
 					$("#updateDataForm").hide();
+				}
+			}); 
+			$('#deleteDataForm').ajaxForm({
+                success: function( html ) {
+					$("#output").append(html);
+					viewAllRecords();
+					$("#deleteDataForm").hide();
 				}
 			}); 
 		});  
@@ -137,7 +147,7 @@ table.tables th	{
 						<td><a href=# onclick="updateRecord()">Update Existing Record</a></td>
 					</tr>
 					<tr>
-						<td><a href=# onclick="deleteRecord()">Delete A Records</a></td>
+						<td><a href=# onclick="deleteRecord()">Delete A Record</a></td>
 					</tr>
 				</table>
 			</div>
@@ -302,11 +312,11 @@ table.tables th	{
           <legend>Car</legend>
 
             <label for="updateVID">Vehicle ID</label>
-            <input type="text" name="car_vid" id="Model" />
+            <input type="text" name="car_vid" id="updateVID" />
             <br><br/>
             
             <label for="updateModel">Model</label>
-            <input type="text" name="car_model" id="Model" />
+            <input type="text" name="car_model" id="updateModel" />
             <br><br/>
 
             <label for="updateType">Car Type</label>
@@ -369,7 +379,7 @@ table.tables th	{
        </fieldset>
 
     <div class="submitForm">
-      <input type="submit" name="formSubmit" value="submit" />
+      <input type="submit" name="formSubmit" value="Submit" />
 
     </div>
 
@@ -401,6 +411,73 @@ table.tables th	{
 			d.getElementById('updateDataForm').className += ' scriptOn';
         })();
     </script>
+	<form id="deleteDataForm" action="query/delete.php" method="post" >
+
+        <fieldset id="deleteTableType">
+
+            <label for="deleteTableNames">Select a table to delete data:</label>
+                 <select name="formTableName" id="deleteTableNames">
+                  <option value="">Select...</option>
+                  <option value="Customer">Customer</option>
+                  <option value="Car">Car</option>
+                </select>
+
+        </fieldset>
+
+        <fieldset id="deleteCustomer">
+            
+            <legend>Customer</legend>
+
+            <label for="deleteCustID">Customer ID</label>
+            <input type="text" name="cust_id" id="deleteCustName" />
+            <br><br />
+
+        </fieldset>
+
+        <fieldset id="deleteCar">
+
+          <legend>Car</legend>
+
+            <label for="deleteVID">Vehicle ID</label>
+            <input type="text" name="car_vid" id="deleteVID" />
+            <br><br/>
+
+       </fieldset>
+
+    <div class="submitForm">
+      <input type="submit" name="formSubmit" value="Submit" />
+
+    </div>
+
+    </form>
+	
+	    <script>
+            (function() {
+            var
+                d = document,
+                fieldsets = ['deleteCustomer', 'deleteCar'];
+
+            for (var t=0; t<fieldsets.length; t++) {
+                fieldsets[t] = d.getElementById(fieldsets[t]);
+                fieldsets[t].style.display = 'none';
+            }
+            d.getElementById('deleteTableNames').onchange = function(e) {
+                e = e || window.event;
+                var
+                    t = e.target || e.srcElement;
+
+                for (var n=0; n<fieldsets.length; n++) {
+                    fieldsets[n].style.display = 'none';
+                }
+                if (s = d.getElementById('delete' + t.options[t.selectedIndex].value)) {
+                    s.style.display = 'block';
+                }
+
+            } 
+			d.getElementById('deleteDataForm').className += ' scriptOn';
+        })();
+    </script>
+	
     </div>
         
 	<div id="tableViewer">

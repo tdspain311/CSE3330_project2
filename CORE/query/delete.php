@@ -7,18 +7,33 @@ $dbname = "db_rental";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname); 
 
-$table = null;
-$condition = null;
-$param1 = null;
+$table = $_POST['formTableName'];
 
-$sql = "DELETE FROM " . $table . " WHERE "  . $param1 . "='" . $condition . "';";
-$result = $conn->query($sql);
+if(isset($_POST['formTableName'])) {
+	switch ($table) {
+		case "Customer":
+			$condition = $_POST['cust_id'];
+			
+			$sql = "DELETE FROM " . $table . " WHERE IdNo=" . $condition . ";";
 
-if ($conn->query($sql) === TRUE) {
-	echo $condition . " is now deleted from '" . $table . "' successfully<br>";
-} else {
-    echo "Error deleting record: " . $conn->error . "<br>";
+			if ($conn->query($sql) === TRUE) {
+				echo $condition . " is now deleted from '" . $table . "' successfully<br>";
+			} else {
+				echo "Error deleting record: " . $conn->error . "<br>";
+			}
+			break;
+		case "Car":
+			$condition = $_POST['car_vid'];
+			
+			$sql = "DELETE FROM " . $table . " WHERE VehicleID=" . $condition . ";";
+
+			if ($conn->query($sql) === TRUE) {
+				echo $condition . " is now deleted from '" . $table . "' successfully<br>";
+			} else {
+				echo "Error deleting record: " . $conn->error . "<br>";
+			}
+			break;
+	}
 }
-
 $conn->close();
 ?>
