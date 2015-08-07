@@ -44,18 +44,19 @@ if(isset($_POST['formTableName'])) {
 		case "Rental":
 			$param1 = $_POST['vid'];
 			$param2 = $_POST['cid'];
-			$param3 = $_POST['rental_type'];
-			$param4 = $_POST['days_weeks'];
-			if ($param3 == 'Daily') {
-				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Daily, StartDate, NoOfDays) VALUES ( " . $param1 . ", " . $param2 . ", 'Yes', CURDATE()," . $param4 . ");";
-			}
-			if ($param3 == 'Weekly') {
-				$sql = "INSERT INTO " . $table . " (VehicleID, CustID, Weekly, StartDate, NoOfWeeks) VALUES ( " . $param1 . ", " . $param2 . ", 'Yes', CURDATE()," . $param4 . ");";
-			}
-			$sql = "UPDATE " . $table . " SET " . $param1 . "='" . $param2 . "' WHERE " . $param1 . "='". $condition . "';";
-
+			
+			$sql = "DELETE FROM " . $table . " WHERE VehicleID=" . $param1 . " AND CustID=" . $param2 . ";";
+			
 			if ($conn->query($sql) === TRUE) {
-				echo $param1 . " is now " . $param2 . " when " . $table . " has '" . $condition . "' successfully<br>";
+				echo "Customer '" . $param2 . "' is has returned vehicle<br>";
+			} else {
+				echo "Error deleting record: " . $conn->error . "<br>";
+			}
+			
+			$sql = "UPDATE car SET Availability='Yes' WHERE VehicleID=" . $param1 . ";";
+			
+			if ($conn->query($sql) === TRUE) {
+				echo "Vehicle '" . $param1 . "' is now available<br>";
 			} else {
 				echo "Error updating record: " . $conn->error . "<br>";
 			}
