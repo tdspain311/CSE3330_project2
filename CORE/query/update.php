@@ -63,17 +63,18 @@ if(isset($_POST['formTableName'])) {
 			
 			if ($conn->query($sql) === TRUE) {
 				echo "Customer '" . $param2 . "' is has returned vehicle<br>";
+				$sql = "UPDATE car SET Availability='Yes' WHERE VehicleID=" . $param1 . ";";
+				
+				if ($conn->query($sql) === TRUE) {
+					echo "Vehicle '" . $param1 . "' is now available<br>";
+				} else {
+					echo "Error updating record: " . $conn->error . "<br>";
+				}
 			} else {
 				echo "Error deleting record: " . $conn->error . "<br>";
 			}
 			
-			$sql = "UPDATE car SET Availability='Yes' WHERE VehicleID=" . $param1 . ";";
-			
-			if ($conn->query($sql) === TRUE) {
-				echo "Vehicle '" . $param1 . "' is now available<br>";
-			} else {
-				echo "Error updating record: " . $conn->error . "<br>";
-			}
+
 			break;
 		case "Rates":
 			$table = 'type';
