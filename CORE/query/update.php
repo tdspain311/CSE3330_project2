@@ -55,9 +55,8 @@ if(isset($_POST['formTableName'])) {
 			$result = $conn->query($sql);
 			
 			if ($result->num_rows > 0) {
-				while($row = $result->fetch_assoc()) {
-					echo "Customer '" . $param2 . "' owes " . $row['AmountDue'] . "<br>";
-				}
+				$row = $result->fetch_assoc();
+				echo "Customer '" . $param2 . "' owes " . $row['AmountDue'] . "<br>";
 			}
 			
 			$sql = "DELETE FROM " . $table . " WHERE VehicleID=" . $param1 . " AND CustID=" . $param2 . ";";
