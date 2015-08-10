@@ -71,7 +71,9 @@ table.tables th	{
 	function loaders() {
 		$.ajax({url: "CORE/php/loadData.php"}).done(function( html ) {
 			$("#output").append(html);
+			showTables();
 		});
+
 	}
 	function createTriggers() {
 		$.ajax({url: "CORE/php/createTriggers.php"}).done(function( html ) {
@@ -87,6 +89,7 @@ table.tables th	{
 	function dropDB() {
 		$.ajax({url: "CORE/php/dropDatabase.php"}).done(function( html ) {
 			$("#output").append(html);
+			$('#tableViewer').empty();
 		});
 	}
 	
