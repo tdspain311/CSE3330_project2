@@ -73,7 +73,7 @@ if ($conn->query($sql) === TRUE) {
 $sql = "CREATE TABLE rental
 (
 Status VARCHAR(12) 			DEFAULT 'Scheduled',
-VehicleID INT(4),
+VehicleID INT(4)						UNIQUE,
 CustID INT(2),
 Daily VARCHAR(6)				DEFAULT 'No',
 Weekly VARCHAR(6)			DEFAULT 'No',
